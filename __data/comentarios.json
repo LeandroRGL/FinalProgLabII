@@ -1,0 +1,14 @@
+[
+    {
+     "id": 1,
+     "película_id": 1,
+     "usuario_id": 1,
+     "opinión": "el comentario lalala"
+    },
+    {
+    "id": 1,
+    "película_id": 1,
+    "usuario_id": 2,
+    "opinión": "una tabos..."
+    }
+]

@@ -6,7 +6,7 @@
         "director_id": 2,
         "género_id": 1,
         "sinopsis": "Un agente de policía de Detroit es asesinado por una banda de criminales. Utilizan el cuerpo del agente muerto para convertirlo en un nuevo policía cibernético.",
-        "imagen": "https://cdn.shopify.com/s/files/1/0057/3728/3618/products/e12127ae5f547737795dc2a16db39848_f74e528b-99e1-4fa1-a0f6-25b751b7d8d8_480x.progressive.jpg"
+        "póster": "https://cdn.shopify.com/s/files/1/0057/3728/3618/products/e12127ae5f547737795dc2a16db39848_f74e528b-99e1-4fa1-a0f6-25b751b7d8d8_480x.progressive.jpg"
     },
     {
         "id": 2,
@@ -15,6 +15,6 @@
         "director_id": 1,
         "género_id": 2,
         "sinopsis": "Un grupo de amigos han crecido juntos en un peligroso barrio obrero de Boston. La situación se torna heavy cuando un chico es secuestrado ante los ojos de sus amigos, una cuestión que marcará el resto sus vidas.",
-        "imagen": "https://cdn.shopify.com/s/files/1/0057/3728/3618/products/803c123698432d83d4d0e151c3fe9b64_e43fef15-3ad0-49e5-a6e1-ef60efdb918b_480x.progressive.jpg"
+        "póster": "https://cdn.shopify.com/s/files/1/0057/3728/3618/products/803c123698432d83d4d0e151c3fe9b64_e43fef15-3ad0-49e5-a6e1-ef60efdb918b_480x.progressive.jpg"
     }
 ]
