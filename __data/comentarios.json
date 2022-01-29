@@ -10,5 +10,11 @@
     "película_id": 1,
     "usuario_id": 2,
     "opinión": "una tabos..."
+    },
+    {
+    "id": 1,
+    "película_id": 2,
+    "usuario_id": 2,
+    "opinión": "una segunda tabos..."
     }
 ]
