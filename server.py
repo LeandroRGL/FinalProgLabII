@@ -13,18 +13,17 @@
 # --------------------------------------------------
 
 
-# Includes
+# Librerías
 import os                       # Lectura y escritura de archivos
 import json                     # Manipular JSON
 from flask import Flask         # Servidor FLASK
 from flask import jsonify       # Manipular JSON
+from flask import request       # Peticionar datos
 from http import HTTPStatus     # Códigos HTTP legibles
 
 
 # Configuración
 servidor_nombre = "Movies API server [ PrgLabII 2022 ]"
-
-servidor_API = Flask(servidor_nombre)
 
 
 # Data
@@ -52,10 +51,19 @@ with open(os.path.join(ruta_data, 'comentarios.json'), 'r', encoding="utf-8") as
 
 
 # - - Principal - -
+servidor_API = Flask(servidor_nombre)
+
 
 @servidor_API.route("/", methods=["GET"])
 def default():
     return servidor_nombre, HTTPStatus.OK
+
+
+# -- Usuarios
+@servidor_API.route("/usuarios", methods=["GET"])
+@servidor_API.route("/usuarios/", methods=["GET"])
+def usuarios_devolver_todos():
+    return jsonify(usuarios), HTTPStatus.OK
 
 
 # -- Películas
@@ -78,7 +86,25 @@ def peliculas_devolver_una(clnt_id):
         return jsonify("[err] - <id> debe ser entero"), HTTPStatus.BAD_REQUEST
 
 
+@servidor_API.route("/peliculas", methods=["POST"])
+@servidor_API.route("/peliculas/", methods=["POST"])
+def peliculas_agregar_una():
+    clnt_data = request.get_json()
 
+    if "título" in clnt_data:
+        peliculas.append({
+            "id": 33,
+            "título": clnt_data["título"],
+            "año": 2005,
+            "director_id": 2,
+            "género_id": 33,
+            "sinopsis": clnt_data["título"],
+            "póster": "sdsddsfsdfsdf",
+            "usuario_id": 2
+        })
+        return jsonify(clnt_data), HTTPStatus.CREATED
+    else:
+        return jsonify("[err] - <título> debe estar presente"), HTTPStatus.BAD_REQUEST
 
 
 
@@ -115,23 +141,49 @@ def comentarios_devolver_por_usuario(clnt_id):
         return jsonify("[err] - <id> debe ser entero"), HTTPStatus.BAD_REQUEST
 
 
+@servidor_API.route("/peliculas/<clnt_id>/comentarios", methods=["POST"])
+@servidor_API.route("/peliculas/<clnt_id>/comentarios/", methods=["POST"])
+def comentarios_agregar_uno(clnt_id):
+    if clnt_id.isnumeric():
+        id = int(clnt_id)
+
+        clnt_data = request.get_json()
+
+        if "opinión" in clnt_data:
+            comentarios.append({
+                "id": 33,
+                "película_id": 2,
+                "opinión": clnt_data["opinión"],
+                "usuario_id": 2
+            })
+            return jsonify(clnt_data), HTTPStatus.CREATED
+        else:
+            return jsonify("[err] - <opinión> debe estar presente"), HTTPStatus.BAD_REQUEST
+    else:
+        return jsonify("[err] - <id> debe ser entero"), HTTPStatus.BAD_REQUEST
+
+
+
 # -- Directores
 @servidor_API.route("/directores", methods=["GET"])
 @servidor_API.route("/directores/", methods=["GET"])
 def directores_devolver_todos():
     return jsonify(directores), HTTPStatus.OK
 
-# @servidor_API.route("/test", methods=["GET"])
-# @servidor_API.route("/test/", methods=["GET"])
-# def funcion():
-#     return jsonify(peliculas), HTTPStatus.OK
 
+@servidor_API.route("/peliculas/<clnt_id>/directores", methods=["GET"])
+@servidor_API.route("/peliculas/<clnt_id>/directores/", methods=["GET"])
+def directores_devolver_uno(clnt_id):
+    if clnt_id.isnumeric():
+        id = int(clnt_id)
 
+        for director in directores:
+            if director["id"] == id:
+                return jsonify(director["nombre"]), HTTPStatus.OK
+        return jsonify("[nfo] - <" + str(id) + "> no existe"), HTTPStatus.NOT_FOUND
+    else:
+        return jsonify("[err] - <id> debe ser entero"), HTTPStatus.BAD_REQUEST
 
-# @servidor_API.route("/usuarios", methods=["GET"])
-# @servidor_API.route("/usuarios/", methods=["GET"])
-# def funcionusuarios():
-#     return jsonify(usuarios), HTTPStatus.OK
 
 
 # -- Géneros

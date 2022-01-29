@@ -2,19 +2,19 @@
     {
      "id": 1,
      "película_id": 1,
-     "usuario_id": 1,
-     "opinión": "el comentario lalala"
+     "opinión": "el comentario lalala",
+     "usuario_id": 1
     },
     {
     "id": 1,
     "película_id": 1,
-    "usuario_id": 2,
-    "opinión": "una tabos..."
+    "opinión": "una tabos...",
+    "usuario_id": 2
     },
     {
     "id": 1,
     "película_id": 2,
-    "usuario_id": 2,
-    "opinión": "una segunda tabos..."
+    "opinión": "una segunda tabos...",
+    "usuario_id": 2
     }
 ]
