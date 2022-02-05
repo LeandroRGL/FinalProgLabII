@@ -14,12 +14,14 @@
 
 
 # Librerías
-import os                       # Lectura y escritura de archivos
-import json                     # Manipular JSON
-from flask import Flask         # Servidor FLASK
-from flask import jsonify       # Manipular JSON
-from flask import request       # Peticionar datos
-from http import HTTPStatus     # Códigos HTTP legibles
+import os                               # Lectura y escritura de archivos
+import json                             # Manipular JSON
+from flask import Flask                 # Servidor FLASK
+from flask import jsonify               # Manipular JSON
+from flask import request               # Peticionar datos
+from http import HTTPStatus             # Códigos HTTP legibles
+from flask_cors import CORS             # Permitir Intercambio Recursos Origen Cruzado
+from flask_cors import cross_origin     # Encabezado HTTP Origen Cruzado
 
 
 # - - Configuración - -
@@ -46,11 +48,16 @@ with open(os.path.join(ruta_data, 'comentarios.json'), 'r', encoding="utf-8") as
     comentarios = json.load(data_JSON)
 
 
-
-# - - Principal - -
+# - - Servidor - -
 servidor_API = Flask(servidor_nombre)
+cors = CORS(servidor_API)
+servidor_API.config['CORS_HEADERS'] = 'Content-Type'
+
+@cross_origin()
 
 
+
+# - - Entry-Points - -
 @servidor_API.route("/", methods=["GET"])
 def default():
     return servidor_nombre, HTTPStatus.OK
@@ -188,7 +195,6 @@ def directores_devolver_uno(clnt_id):
 @servidor_API.route("/generos/", methods=["GET"])
 def generos_devolver_todos():
     return jsonify(generos), HTTPStatus.OK
-
 
 
 servidor_API.run()
