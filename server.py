@@ -22,11 +22,11 @@ from flask import request       # Peticionar datos
 from http import HTTPStatus     # Códigos HTTP legibles
 
 
-# Configuración
+# - - Configuración - -
 servidor_nombre = "Movies API server [ PrgLabII 2022 ]"
 
 
-# Data
+# - - Data - -
 ruta_actual = os.path.dirname(__file__)
 ruta_data = ruta_actual + "/__data/"
 
@@ -47,9 +47,6 @@ with open(os.path.join(ruta_data, 'comentarios.json'), 'r', encoding="utf-8") as
 
 
 
-
-
-
 # - - Principal - -
 servidor_API = Flask(servidor_nombre)
 
@@ -59,14 +56,14 @@ def default():
     return servidor_nombre, HTTPStatus.OK
 
 
-# -- Usuarios
+# - Usuarios
 @servidor_API.route("/usuarios", methods=["GET"])
 @servidor_API.route("/usuarios/", methods=["GET"])
 def usuarios_devolver_todos():
     return jsonify(usuarios), HTTPStatus.OK
 
 
-# -- Películas
+# - Películas
 @servidor_API.route("/peliculas", methods=["GET"])
 @servidor_API.route("/peliculas/", methods=["GET"])
 def peliculas_devolver_todas():
@@ -108,7 +105,7 @@ def peliculas_agregar_una():
 
 
 
-# -- Comentarios
+# - Comentarios
 @servidor_API.route("/comentarios", methods=["GET"])
 @servidor_API.route("/comentarios/", methods=["GET"])
 def comentarios_devolver_todos():
@@ -164,7 +161,7 @@ def comentarios_agregar_uno(clnt_id):
 
 
 
-# -- Directores
+# - Directores
 @servidor_API.route("/directores", methods=["GET"])
 @servidor_API.route("/directores/", methods=["GET"])
 def directores_devolver_todos():
@@ -186,7 +183,7 @@ def directores_devolver_uno(clnt_id):
 
 
 
-# -- Géneros
+# - Géneros
 @servidor_API.route("/generos", methods=["GET"])
 @servidor_API.route("/generos/", methods=["GET"])
 def generos_devolver_todos():
