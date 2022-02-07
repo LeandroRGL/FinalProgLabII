@@ -89,7 +89,6 @@ def peliculas_devolver_una(clnt_id):
     else:
         return jsonify("[err] - <id> debe ser entero"), HTTPStatus.BAD_REQUEST
 
-
 @servidor_API.route("/peliculas", methods=["POST"])
 @servidor_API.route("/peliculas/", methods=["POST"])
 def peliculas_agregar_una():
@@ -109,7 +108,6 @@ def peliculas_agregar_una():
         return jsonify(clnt_data), HTTPStatus.CREATED
     else:
         return jsonify("[err] - <título> debe estar presente"), HTTPStatus.BAD_REQUEST
-
 
 
 # - Comentarios
@@ -144,7 +142,6 @@ def comentarios_devolver_por_usuario(clnt_id):
     else:
         return jsonify("[err] - <id> debe ser entero"), HTTPStatus.BAD_REQUEST
 
-
 @servidor_API.route("/peliculas/<clnt_id>/comentarios", methods=["POST"])
 @servidor_API.route("/peliculas/<clnt_id>/comentarios/", methods=["POST"])
 def comentarios_agregar_uno(clnt_id):
@@ -167,13 +164,11 @@ def comentarios_agregar_uno(clnt_id):
         return jsonify("[err] - <id> debe ser entero"), HTTPStatus.BAD_REQUEST
 
 
-
 # - Directores
 @servidor_API.route("/directores", methods=["GET"])
 @servidor_API.route("/directores/", methods=["GET"])
 def directores_devolver_todos():
     return jsonify(directores), HTTPStatus.OK
-
 
 @servidor_API.route("/peliculas/<clnt_id>/directores", methods=["GET"])
 @servidor_API.route("/peliculas/<clnt_id>/directores/", methods=["GET"])
@@ -187,7 +182,6 @@ def directores_devolver_uno(clnt_id):
         return jsonify("[nfo] - <" + str(id) + "> no existe"), HTTPStatus.NOT_FOUND
     else:
         return jsonify("[err] - <id> debe ser entero"), HTTPStatus.BAD_REQUEST
-
 
 
 # - Géneros

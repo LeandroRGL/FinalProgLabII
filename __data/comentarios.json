@@ -6,15 +6,21 @@
      "usuario_id": 1
     },
     {
-    "id": 1,
+    "id": 2,
     "película_id": 1,
     "opinión": "una tabos...",
     "usuario_id": 2
     },
     {
-    "id": 1,
+    "id": 3,
     "película_id": 2,
     "opinión": "una segunda tabos...",
     "usuario_id": 2
+    },
+    {
+    "id": 4,
+    "película_id": 2,
+    "opinión": "a mi me gustó... y qué",
+    "usuario_id": 3
     }
 ]

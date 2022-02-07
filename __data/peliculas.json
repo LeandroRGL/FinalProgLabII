@@ -17,6 +17,36 @@
         "género_id": 2,
         "sinopsis": "Un grupo de amigos han crecido juntos en un peligroso barrio obrero de Boston. La situación se torna heavy cuando un chico es secuestrado ante los ojos de sus amigos, una cuestión que marcará el resto sus vidas.",
         "póster": "https://cdn.shopify.com/s/files/1/0057/3728/3618/products/803c123698432d83d4d0e151c3fe9b64_e43fef15-3ad0-49e5-a6e1-ef60efdb918b_480x.progressive.jpg",
+        "usuario_id": 2
+    },
+    {
+        "id": 3,
+        "título": "Space Cowboys",
+        "año": 2000,
+        "director_id": 1,
+        "género_id": 3,
+        "sinopsis": "una sipnopsips",
+        "póster": "",
+        "usuario_id": 2
+    },
+    {
+        "id": 4,
+        "título": "Total Recall",
+        "año": 1990,
+        "director_id": 2,
+        "género_id": 3,
+        "sinopsis": "Scharzenneger",
+        "póster": "",
+        "usuario_id": 2
+    },
+    {
+        "id": 5,
+        "título": "Blade Runner",
+        "año": 1982,
+        "director_id": 3,
+        "género_id": 3,
+        "sinopsis": "Humanos fabricados en laboratorio",
+        "póster": "https://cdn.shopify.com/s/files/1/0057/3728/3618/products/d9f6067d2406a7cfbf42a5fc4ae4cd9d_8174831c-db77-4608-9ae2-44aca8f2a6f5_480x.progressive.jpg",
         "usuario_id": 1
     }
 ]

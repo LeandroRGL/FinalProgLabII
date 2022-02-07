@@ -8,5 +8,10 @@
         "id": 2,
         "nombre": "Agustín",
         "clave": "pass2"
+    },
+    {
+        "id": 3,
+        "nombre": "Juan",
+        "clave": "pass"
     }
 ]
