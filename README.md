@@ -5,11 +5,16 @@
 Crear una plataforma web para mantener una lista de películas recomendadas por parte de los usuarios
 
 ### Back-end:
-- dasdasd ■□ 
-  - asdasdas ■□
+- Servidor API ■
+- CORS ■
+- Datos JSON archivos externos ■
 
 ### Front-end
-- dasdasada ◄
-- asdasdas
+- Diseño básico □
+- Consulta básica GET ■
+- Consulta básica POST □
+- Página LogIn □
+- Página principal □
+- Página película □
 
 
