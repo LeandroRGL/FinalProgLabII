@@ -4,17 +4,12 @@
 
 Crear una plataforma web para mantener una lista de películas recomendadas por parte de los usuarios
 
-### Requisitos:
-- dasdasd
-  - asdasdas
+### Back-end:
+- dasdasd ■□ 
+  - asdasdas ■□
 
-### Otros Reqs
-- dasdasada
+### Front-end
+- dasdasada ◄
 - asdasdas
-
-### Mas Reqs
-- sdfsdf sdf sd
-  - sdf sdffd
-  - f sdfsdfs
 
 
