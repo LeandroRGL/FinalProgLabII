@@ -4,7 +4,7 @@
 
 Crear una plataforma web para mantener una lista de películas recomendadas por parte de los usuarios
 
-### Back-end:
+### Back-end
 - Servidor API ■
 - CORS ■
 - Datos JSON archivos externos ■
