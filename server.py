@@ -5,7 +5,7 @@
 # Laboratorio de computación II
 # TUP - UTN FRBB
 #
-# Leandro M. Regolf & Agustín Ascolani
+# Agustín Ascolani & Leandro M. Regolf
 # --------------------------------------------------
 #
 # Crear una plataforma web para mantener una lista de
