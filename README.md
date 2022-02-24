@@ -11,7 +11,6 @@ Crear una plataforma web para mantener una lista de películas recomendadas por 
 ### Otros Reqs
 - dasdasada
 - asdasdas
-- adsadasda
 
 ### Mas Reqs
 - sdfsdf sdf sd
