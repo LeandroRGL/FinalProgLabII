@@ -1,13 +1,24 @@
-var btn_consulta = document.getElementById("cn1");
+var cns_peliculas = document.getElementById("cn1");
 
-btn_consulta.addEventListener('click', evento => {
+cns_peliculas.addEventListener('click', evento => {
     fetch('http://127.0.0.1:5000/peliculas/')
         .then(respuesta => respuesta.json())
-        .then(datos => {
-        console.log(datos)
+        .then(peliculas => {
+        console.log(peliculas)
 
-        var ff = datos;
+        console.log(peliculas[0].título);
+        })
+})
 
-        console.log(datos[0].título);
+
+var cns_directores = document.getElementById("cn2");
+
+cns_directores.addEventListener('click', evento => {
+    fetch('http://127.0.0.1:5000/directores/')
+        .then(respuesta => respuesta.json())
+        .then(directores => {
+        console.log(directores)
+
+        console.log(directores[0].nombre);
         })
 })

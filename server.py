@@ -28,6 +28,11 @@ from flask_cors import cross_origin     # Encabezado HTTP Origen Cruzado
 servidor_nombre = "Movies API server [ PrgLabII 2022 ]"
 
 
+# - - Globales - -
+usuario_id_auth = 0
+usuario_nombre_auth = ""
+
+
 # - - Data - -
 ruta_actual = os.path.dirname(__file__)
 ruta_data = ruta_actual + "/__data/"
@@ -48,6 +53,32 @@ with open(os.path.join(ruta_data, 'comentarios.json'), 'r', encoding="utf-8") as
     comentarios = json.load(data_JSON)
 
 
+# - - Funciones - -
+def usuario_loguear(id, nombre):
+    global usuario_id_auth
+    global usuario_nombre_auth
+
+    usuario_id_auth = id
+    usuario_nombre_auth = nombre
+
+def usuario_desloguear():
+    global usuario_id_auth
+    global usuario_nombre_auth
+
+    usuario_id_auth = 0
+    usuario_nombre_auth = ""
+
+def usuario_chequear_logged():
+    global usuario_id_auth
+    global usuario_nombre_auth
+
+    if usuario_id_auth != 0:
+        return True
+    else:
+        return False
+
+
+
 # - - Servidor - -
 servidor_API = Flask(servidor_nombre)
 cors = CORS(servidor_API)
@@ -62,12 +93,36 @@ servidor_API.config['CORS_HEADERS'] = 'Content-Type'
 def default():
     return servidor_nombre, HTTPStatus.OK
 
-
 # - Usuarios
 @servidor_API.route("/usuarios", methods=["GET"])
 @servidor_API.route("/usuarios/", methods=["GET"])
 def usuarios_devolver_todos():
-    return jsonify(usuarios), HTTPStatus.OK
+    if usuario_chequear_logged():
+        return jsonify(usuarios), HTTPStatus.OK
+    else:
+        return jsonify("no leogueado"), HTTPStatus.OK
+
+@servidor_API.route("/login", methods=["POST"])
+def usuarios_devolver_login():
+    clnt_data = request.get_json()
+
+    if "usuario" in clnt_data and "clave" in clnt_data:
+        for usuario in usuarios:
+            if usuario["nombre"] == clnt_data["usuario"] and usuario["clave"] == clnt_data["clave"]:
+                usuario_loguear(usuario["id"], usuario["nombre"])
+
+                return jsonify("Bienvenido " + usuario["nombre"] + "!"), HTTPStatus.OK
+        return jsonify("[nfo] - <usuario> o <clave> incorrecta"), HTTPStatus.NOT_FOUND
+    else:
+        return jsonify("[err] - request incompleto"), HTTPStatus.BAD_REQUEST
+
+@servidor_API.route("/logout", methods=["POST"])
+def usuarios_devolver_logout():
+    usuario_desloguear()
+
+    return jsonify("Deslogueado!"), HTTPStatus.OK
+
+
 
 
 # - Películas
@@ -75,6 +130,7 @@ def usuarios_devolver_todos():
 @servidor_API.route("/peliculas/", methods=["GET"])
 def peliculas_devolver_todas():
     response = jsonify(peliculas)
+
     return response, HTTPStatus.OK
 
 @servidor_API.route("/peliculas/<clnt_id>", methods=["GET"])
@@ -105,6 +161,7 @@ def peliculas_agregar_una():
             "póster": "sdsddsfsdfsdf",
             "usuario_id": 2
         })
+
         return jsonify(clnt_data), HTTPStatus.CREATED
     else:
         return jsonify("[err] - <título> debe estar presente"), HTTPStatus.BAD_REQUEST
@@ -157,6 +214,7 @@ def comentarios_agregar_uno(clnt_id):
                 "opinión": clnt_data["opinión"],
                 "usuario_id": 2
             })
+
             return jsonify(clnt_data), HTTPStatus.CREATED
         else:
             return jsonify("[err] - <opinión> debe estar presente"), HTTPStatus.BAD_REQUEST
