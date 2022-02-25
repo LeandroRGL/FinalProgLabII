@@ -27,7 +27,7 @@ Crear una plataforma web para mantener una lista de películas recomendadas por 
 
 
 ### Front-end
-- Diseño básico □
+- Diseño básico y responsivo □
 - Consulta básica GET ■
 - Consulta básica POST □
 - Página LogIn □
