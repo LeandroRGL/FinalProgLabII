@@ -29,7 +29,7 @@ servidor_nombre = "Movies API server [ PrgLabII 2022 ]"
 
 
 # - - Globales - -
-usuario_id_auth = 0
+usuario_id_auth = 1
 usuario_nombre_auth = ""
 
 
@@ -51,6 +51,12 @@ with open(os.path.join(ruta_data, 'generos.json'), 'r', encoding="utf-8") as dat
 
 with open(os.path.join(ruta_data, 'comentarios.json'), 'r', encoding="utf-8") as data_JSON:
     comentarios = json.load(data_JSON)
+
+ult_id_usuarios = 3
+ult_id_peliculas = 5
+ult_id_directores = 4
+ult_id_generos = 5
+ult_id_comentarios = 4
 
 
 # - - Funciones - -
@@ -78,7 +84,6 @@ def usuario_chequear_logged():
         return False
 
 
-
 # - - Servidor - -
 servidor_API = Flask(servidor_nombre)
 cors = CORS(servidor_API)
@@ -100,7 +105,7 @@ def usuarios_devolver_todos():
     if usuario_chequear_logged():
         return jsonify(usuarios), HTTPStatus.OK
     else:
-        return jsonify("no leogueado"), HTTPStatus.OK
+        return jsonify("no leogueado"), HTTPStatus.FORBIDDEN
 
 @servidor_API.route("/login", methods=["POST"])
 def usuarios_devolver_login():
@@ -148,23 +153,65 @@ def peliculas_devolver_una(clnt_id):
 @servidor_API.route("/peliculas", methods=["POST"])
 @servidor_API.route("/peliculas/", methods=["POST"])
 def peliculas_agregar_una():
+    global ult_id_peliculas
+    global usuario_id_auth
+
     clnt_data = request.get_json()
 
-    if "título" in clnt_data:
-        peliculas.append({
-            "id": 33,
-            "título": clnt_data["título"],
-            "año": 2005,
-            "director_id": 2,
-            "género_id": 33,
-            "sinopsis": clnt_data["título"],
-            "póster": "sdsddsfsdfsdf",
-            "usuario_id": 2
-        })
+    if usuario_chequear_logged():
+        if "título" in clnt_data and "año" in clnt_data and "director_id" in clnt_data:
+            ult_id_peliculas += 1
 
-        return jsonify(clnt_data), HTTPStatus.CREATED
+            id = ult_id_peliculas
+            titulo = clnt_data["título"]
+            ano = clnt_data["año"]
+            director_id = clnt_data["director_id"]
+            genero_id = clnt_data["género"] if "género" in clnt_data else ""
+            sinopsis = clnt_data["sinopsis"] if "sinopsis" in clnt_data else ""
+            poster = clnt_data["póster"] if "póster" in clnt_data else ""
+            usuario_id = usuario_id_auth
+
+            peliculas.append({
+                "id": id,
+                "título": titulo,
+                "año": ano,
+                "director_id": director_id,
+                "género_id": genero_id,
+                "sinopsis": sinopsis,
+                "póster": poster,
+                "usuario_id": usuario_id
+            })
+
+            return jsonify("agregado: " + str(id)), HTTPStatus.CREATED
+        else:
+            return jsonify("[err] - <título> <año> <director_id> deben estar presentes"), HTTPStatus.BAD_REQUEST
     else:
-        return jsonify("[err] - <título> debe estar presente"), HTTPStatus.BAD_REQUEST
+        return jsonify("no leogueado"), HTTPStatus.FORBIDDEN
+
+
+
+
+@servidor_API.route("/peliculas", methods=["DELETE"])
+@servidor_API.route("/peliculas/", methods=["DELETE"])
+def peliculas_borrar_una():
+    clnt_data = request.get_json()
+
+    id = clnt_data["id"]
+
+    if usuario_chequear_logged():
+        if "id" in clnt_data:
+            for i in range(len(peliculas)):
+                if peliculas[i]["id"] == id:
+                    pelicula_eliminada = peliculas.pop(i)
+
+                    return jsonify(pelicula_eliminada), HTTPStatus.OK
+
+            return jsonify("[nfo] - <" + str(id) + "> no existe"), HTTPStatus.NOT_FOUND
+        else:
+            return jsonify("[err] - <id> debe estar presente"), HTTPStatus.BAD_REQUEST
+    else:
+        return jsonify("no leogueado"), HTTPStatus.FORBIDDEN
+
 
 
 # - Comentarios
