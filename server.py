@@ -25,7 +25,7 @@ from flask_cors import cross_origin     # Encabezado HTTP Origen Cruzado
 
 
 # - - Configuración - -
-servidor_nombre = "Movies API server [ PrgLabII 2022 ]"
+servidor_nombre = "Movies API server [ PrgLabII 2021 ]"
 
 
 # - - Globales - -
