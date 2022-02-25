@@ -84,6 +84,20 @@ def usuario_chequear_logged():
         return False
 
 
+def check_tiene_poster(pelicula):
+    if len(pelicula["póster"]) > 0:
+        return True
+    else:
+        return False
+
+def check_es_dirigida_por(pelicula, director_id):
+    if pelicula["director_id"] == director_id:
+        return True
+    else:
+        return False
+
+
+
 # - - Servidor - -
 servidor_API = Flask(servidor_nombre)
 cors = CORS(servidor_API)
@@ -149,6 +163,23 @@ def peliculas_devolver_una(clnt_id):
         return jsonify("[nfo] - <" + str(id) + "> no existe"), HTTPStatus.NOT_FOUND
     else:
         return jsonify("[err] - <id> debe ser entero"), HTTPStatus.BAD_REQUEST
+
+
+
+@servidor_API.route("/peliculas/directores/<clnt_id>", methods=["GET"])
+def peliculas_devolver_por_director(clnt_id):
+    # peliculas_dirigida_por = list(filter(check_es_dirigida_por(2), peliculas))
+
+    return jsonify("peliculas_dirigida_por"), HTTPStatus.BAD_REQUEST
+
+
+@servidor_API.route("/peliculas/con_portada", methods=["GET"])
+@servidor_API.route("/peliculas/con_portada/", methods=["GET"])
+def peliculas_devolver_con_poster(clnt_id):
+    peliculas_con_poster = list(filter(check_tiene_poster, peliculas))
+
+    return jsonify(peliculas_con_poster), HTTPStatus.OK
+
 
 @servidor_API.route("/peliculas", methods=["POST"])
 @servidor_API.route("/peliculas/", methods=["POST"])
