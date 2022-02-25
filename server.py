@@ -33,7 +33,7 @@ usuario_id_auth = 1
 usuario_nombre_auth = ""
 
 
-# - - Data - -
+# - - Data inicial - -
 ruta_actual = os.path.dirname(__file__)
 ruta_data = ruta_actual + "/__data/"
 
