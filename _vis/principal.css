@@ -1,0 +1,90 @@
+@font-face {
+    font-family: 'Ubuntu';
+    src: url('../_vis/fonts/Ubuntu-Regular.ttf')  format('truetype');
+  }
+
+/* Reset de estilos */
+html {
+    box-sizing: border-box;
+    font-size: 16px;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+body, h1, h2, h3, h4, h5, h6, p, ol, ul {
+    font-family: 'Ubuntu', Fallback, sans-serif;
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
+}
+ol, ul {
+    list-style: none;
+}
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+
+body {
+    margin: 10px;
+    background-color: rgb(190 190 255);
+}
+
+#contenedor {
+    background-color: rgb(230 230 230);
+}
+
+#navegacion ul {
+    display: flex;
+    align-items: center;
+    background-color: rgb(255 255 255);
+}
+
+#navegacion ul li {
+    padding: 1em;
+}
+#navegacion a {
+    color: rgb(0 0 0);
+    text-decoration: none;
+}
+#navegacion a:hover {
+    color: rgb(170 170 170);
+    text-decoration: none;
+}
+#navegacion a:visited {
+    color: rgb(50 50 50);
+    text-decoration: none;
+}
+
+
+.pelicula {
+    flex: 1;
+    background-color: rgb(250 240 230);
+    margin: 10px;
+    padding: 15px;
+    border-style: solid;
+    border-width: 1px;
+    text-align: center;
+}
+.pelicula img {
+    filter: brightness(100%);
+    max-width: 120px;
+}
+.pelicula img:hover {
+    filter: brightness(150%);
+}
+
+.pelicula .titulo {
+    color: rgb(0 25 250);
+}
+
+#pie {
+    text-align: center;
+    background-color: rgb(0 0 0);
+    color: rgb(255 255 255);
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 3em;
+}
