@@ -1,0 +1,47 @@
+<!doctype html>
+<!--
+# --------------------------------------------------
+# Proyecto final 2021
+#
+# Programación II
+# Laboratorio de computación II
+# TUP - UTN FRBB
+#
+# Agustín Ascolani & Leandro M. Regolf
+# --------------------------------------------------
+#
+# Crear una plataforma web para mantener una lista de
+# películas recomendadas por parte de los usuarios
+# --------------------------------------------------
+-->
+<html lang="es">
+<head>
+<title>Cliente Movies API</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="_vis/principal.css">
+<link rel="shortcut icon" href="_vis/favicon.png" type="image/x-icon">
+<title></title>
+</head>
+<body>
+<div id="contenedor">
+    <form id="frm-pelicula">
+        titulo <input name="titulo" type="text" id="titulo">
+        <br/>
+        año <select name="ano" id="ano"></select>
+        <br/>
+        director <select name="director" id="director"></select>
+        <br/>
+        género <select name="genero" id="genero"></select>
+        <br/>
+        sinopsis <input name="sinopsis" type="text" id="sinopsis">
+        <br/>
+        póster <input name="poster" type="text" id="poster">
+    </form>
+
+    <button id="add_pelicula">agregar película</button>
+</div>
+</body>
+<script src="_js/testagregar.js"></script>
+</html>
