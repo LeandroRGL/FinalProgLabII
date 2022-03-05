@@ -102,16 +102,12 @@ document.addEventListener("DOMContentLoaded", function(){
         console.log(pelicula);
 
 
-
         document.getElementById("titulo").value = "";
         document.getElementById("ano").value = "";
         document.getElementById("director").value = "";
         document.getElementById("genero").value = "";
         document.getElementById("sinopsis").value = "";
         document.getElementById("poster").value = "";
-
-
-
 
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
