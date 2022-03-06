@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function(){
-    fetch('http://127.0.0.1:5000/directores/')
+    fetch(URL_base + "/directores/")
         .then(respuesta => respuesta.json())
         .then(directores => {
         let select = document.getElementById("director");
@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function(){
             }
         })
 
-    fetch('http://127.0.0.1:5000/generos/')
+    fetch(URL_base + "/generos/")
         .then(respuesta => respuesta.json())
         .then(generos => {
         let select = document.getElementById("genero");
@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function(){
             body: JSON.stringify(pelicula)
         }
 
-        fetch("http://127.0.0.1:5000/peliculas/", request_cnf)
+        fetch(URL_base + "/peliculas/", request_cnf)
             .then(respuesta => respuesta.json())
             .then(datos => {
 

@@ -159,7 +159,7 @@ def peliculas_devolver_una(clnt_id):
 
         for pelicula in peliculas:
             if pelicula["id"] == id:
-                return jsonify(pelicula["título"]), HTTPStatus.OK
+                return jsonify(pelicula), HTTPStatus.OK
         return jsonify("[nfo] - <" + str(id) + "> no existe"), HTTPStatus.NOT_FOUND
     else:
         return jsonify("[err] - <id> debe ser entero"), HTTPStatus.BAD_REQUEST
@@ -190,7 +190,8 @@ def peliculas_agregar_una():
     clnt_data = request.get_json()
 
     if usuario_chequear_logged():
-        if "título" in clnt_data and "año" in clnt_data and "director_id" in clnt_data:
+        # if "título" in clnt_data and "año" in clnt_data and "director_id" in clnt_data:
+        if len(clnt_data["título"]) > 0 and len(clnt_data["año"]) > 0 and len(clnt_data["director_id"]) > 0:
             ult_id_peliculas += 1
 
             id = ult_id_peliculas
@@ -215,7 +216,7 @@ def peliculas_agregar_una():
 
             return jsonify("agregado: " + str(id)), HTTPStatus.CREATED
         else:
-            return jsonify("[err] - <título> <año> <director_id> deben estar presentes"), HTTPStatus.BAD_REQUEST
+            return jsonify("ERROR: <título> <año> <director_id> deben estar presentes"), HTTPStatus.BAD_REQUEST
     else:
         return jsonify("no leogueado"), HTTPStatus.FORBIDDEN
 
@@ -257,10 +258,9 @@ def comentarios_devolver_por_pelicula(clnt_id):
     if clnt_id.isnumeric():
         id = int(clnt_id)
 
-        for comentario in comentarios:
-            if comentario["película_id"] == id:
-                return jsonify(comentario["opinión"]), HTTPStatus.OK
-        return jsonify("[nfo] - <" + str(id) + "> no existe"), HTTPStatus.NOT_FOUND
+        comentarios_por_pelicula = [comentario for comentario in comentarios if comentario["película_id"] == id]
+
+        return jsonify(comentarios_por_pelicula), HTTPStatus.OK
     else:
         return jsonify("[err] - <id> debe ser entero"), HTTPStatus.BAD_REQUEST
 
@@ -315,9 +315,9 @@ def directores_devolver_uno(clnt_id):
         for director in directores:
             if director["id"] == id:
                 return jsonify(director["nombre"]), HTTPStatus.OK
-        return jsonify("[nfo] - <" + str(id) + "> no existe"), HTTPStatus.NOT_FOUND
+        return jsonify("INFO: <" + str(id) + "> no existe"), HTTPStatus.NOT_FOUND
     else:
-        return jsonify("[err] - <id> debe ser entero"), HTTPStatus.BAD_REQUEST
+        return jsonify("ERROR: <id> debe ser entero"), HTTPStatus.BAD_REQUEST
 
 
 # - Géneros
@@ -325,6 +325,20 @@ def directores_devolver_uno(clnt_id):
 @servidor_API.route("/generos/", methods=["GET"])
 def generos_devolver_todos():
     return jsonify(generos), HTTPStatus.OK
+
+@servidor_API.route("/peliculas/<clnt_id>/generos", methods=["GET"])
+@servidor_API.route("/peliculas/<clnt_id>/generos/", methods=["GET"])
+def generos_devolver_uno(clnt_id):
+    if clnt_id.isnumeric():
+        id = int(clnt_id)
+
+        for genero in generos:
+            if genero["id"] == id:
+                return jsonify(genero["denominación"]), HTTPStatus.OK
+        return jsonify("INFO: <" + str(id) + "> no existe"), HTTPStatus.NOT_FOUND
+    else:
+        return jsonify("ERROR: <id> debe ser entero"), HTTPStatus.BAD_REQUEST
+
 
 
 servidor_API.run()

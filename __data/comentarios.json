@@ -22,5 +22,17 @@
     "película_id": 2,
     "opinión": "a mi me gustó... y qué",
     "usuario_id": 3
+    },
+    {
+     "id": 5,
+     "película_id": 1,
+     "opinión": "excelente pelicula de los 80",
+     "usuario_id": 1
+    },
+    {
+     "id": 6,
+     "película_id": 1,
+     "opinión": "'Dead or alive you are coming with me'",
+     "usuario_id": 2
     }
 ]

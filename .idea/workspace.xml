@@ -3,6 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="2e79c709-62da-4071-ae66-11b69d2167a8" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/__data/comentarios.json" beforeDir="false" afterPath="$PROJECT_DIR$/__data/comentarios.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/__data/peliculas.json" beforeDir="false" afterPath="$PROJECT_DIR$/__data/peliculas.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_js/principal.js" beforeDir="false" afterPath="$PROJECT_DIR$/_js/principal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_js/testagregar.js" beforeDir="false" afterPath="$PROJECT_DIR$/_js/testagregar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_vis/principal.css" beforeDir="false" afterPath="$PROJECT_DIR$/_vis/principal.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/indexKCO.htm" beforeDir="false" afterPath="$PROJECT_DIR$/indexKCO.htm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/peliculaKCO.htm" beforeDir="false" afterPath="$PROJECT_DIR$/peliculaKCO.htm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/server.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testagregarKCO.htm" beforeDir="false" afterPath="$PROJECT_DIR$/testagregarKCO.htm" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

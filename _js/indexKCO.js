@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", function(){
     var cns_peliculas = document.getElementById("cns_peliculas");
 
-    cns_peliculas.addEventListener('click', evento => {
-        fetch('http://127.0.0.1:5000/peliculas/')
+    cns_peliculas.addEventListener("click", evento => {
+        fetch(URL_base + "/peliculas/")
             .then(respuesta => respuesta.json())
             .then(peliculas => {
             let div_principal = document.getElementById('principal');
