@@ -8,7 +8,7 @@ Crear una plataforma web para mantener una lista de películas recomendadas por 
 - Servidor API ■□□
 - CORS ■■□
 - Data inicial JSON archivos externos ■■■
-- Servicos básicos
+- Servicos básicos○●
   - Sistema de log-in ■□□<br/>
     &nbsp;&nbsp;&nbsp;localhost:5000/login&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;localhost:5000/logout
 - Otros servicios
