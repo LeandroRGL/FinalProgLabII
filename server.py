@@ -100,10 +100,11 @@ def check_es_dirigida_por(pelicula, director_id):
 
 # - - Servidor - -
 servidor_API = Flask(servidor_nombre)
-cors = CORS(servidor_API)
+cors = CORS(servidor_API, resources={r"/*/*": {"origins": "*"}})
 servidor_API.config['CORS_HEADERS'] = 'Content-Type'
 
-@cross_origin()
+@cross_origin(origin='*', headers=['Content-Type','Authorization'])
+
 
 
 
@@ -184,6 +185,48 @@ def peliculas_devolver_con_poster(clnt_id):
 @servidor_API.route("/peliculas", methods=["POST"])
 @servidor_API.route("/peliculas/", methods=["POST"])
 def peliculas_agregar_una():
+    global ult_id_peliculas
+    global usuario_id_auth
+
+    clnt_data = request.get_json()
+
+    if usuario_chequear_logged():
+        # if "título" in clnt_data and "año" in clnt_data and "director_id" in clnt_data:
+        if len(clnt_data["título"]) > 0 and len(clnt_data["año"]) > 0 and len(clnt_data["director_id"]) > 0:
+            ult_id_peliculas += 1
+
+            id = ult_id_peliculas
+            titulo = clnt_data["título"]
+            ano = clnt_data["año"]
+            director_id = clnt_data["director_id"]
+            genero_id = clnt_data["género"] if "género" in clnt_data else ""
+            sinopsis = clnt_data["sinopsis"] if "sinopsis" in clnt_data else ""
+            poster = clnt_data["póster"] if "póster" in clnt_data else ""
+            usuario_id = usuario_id_auth
+
+            peliculas.append({
+                "id": id,
+                "título": titulo,
+                "año": ano,
+                "director_id": director_id,
+                "género_id": genero_id,
+                "sinopsis": sinopsis,
+                "póster": poster,
+                "usuario_id": usuario_id
+            })
+
+            return jsonify("agregado: " + str(id)), HTTPStatus.CREATED
+        else:
+            return jsonify("ERROR: <título> <año> <director_id> deben estar presentes"), HTTPStatus.BAD_REQUEST
+    else:
+        return jsonify("no leogueado"), HTTPStatus.FORBIDDEN
+
+
+
+
+@servidor_API.route("/peliculas/ggg/ggg/", methods=["POST"])
+@servidor_API.route("/peliculas/ggg/ggg", methods=["POST"])
+def peliculas_agregar_unad():
     global ult_id_peliculas
     global usuario_id_auth
 

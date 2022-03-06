@@ -40,7 +40,53 @@ document.addEventListener("DOMContentLoaded", function(){
                     div_comentarios.appendChild(new_div_comentario);
                     }
                 })
+
+
+document.getElementById("agr_comentario").addEventListener('click', evento => {
+        let pelicular = {
+            título: "wewettttttttttttttttt",
+            año: "wewe",
+            director_id: "wewe",
+            género_id: "wewe",
+            sinopsis: "wewe",
+            póster: "wewe"
+        }
+
+        let request_cnf = {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(pelicular)
+        }
+
+        fetch(URL_base + "/peliculas/ggg/ggg", request_cnf)
+            .then(respuesta => respuesta.json())
+            .then(datos => {
+
+            console.log(datos);
+
+
+            alert(datos);
             })
+})
+
+
+
+
+
+
+
+
+            alert("weqwe");
+            })
+
+
+
+        document.getElementById("brr_pelicula").addEventListener('click', evento => {
+            alert("fsdfsdfsdfweqwe");
+            })
+
+
+
     }else{
          alert("nope!");;
     }
