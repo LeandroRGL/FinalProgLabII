@@ -100,7 +100,7 @@ def check_es_dirigida_por(pelicula, director_id):
 
 # - - Servidor - -
 servidor_API = Flask(servidor_nombre)
-cors = CORS(servidor_API, resources={r"/*/*": {"origins": "*"}})
+cors = CORS(servidor_API, resources={r"/*/*/*": {"origins": "*"}})
 servidor_API.config['CORS_HEADERS'] = 'Content-Type'
 
 @cross_origin(origin='*', headers=['Content-Type','Authorization'])
@@ -224,8 +224,8 @@ def peliculas_agregar_una():
 
 
 
-@servidor_API.route("/peliculas/ggg/ggg/", methods=["POST"])
-@servidor_API.route("/peliculas/ggg/ggg", methods=["POST"])
+@servidor_API.route("/peliculas/ggg/comentario/", methods=["POST"])
+@servidor_API.route("/peliculas/ggg/comentario", methods=["POST"])
 def peliculas_agregar_unad():
     global ult_id_peliculas
     global usuario_id_auth
@@ -307,6 +307,7 @@ def comentarios_devolver_por_pelicula(clnt_id):
     else:
         return jsonify("[err] - <id> debe ser entero"), HTTPStatus.BAD_REQUEST
 
+
 @servidor_API.route("/usuarios/<clnt_id>/comentarios", methods=["GET"])
 @servidor_API.route("/usuarios/<clnt_id>/comentarios/", methods=["GET"])
 def comentarios_devolver_por_usuario(clnt_id):
@@ -320,8 +321,8 @@ def comentarios_devolver_por_usuario(clnt_id):
     else:
         return jsonify("[err] - <id> debe ser entero"), HTTPStatus.BAD_REQUEST
 
-@servidor_API.route("/peliculas/<clnt_id>/comentarios", methods=["POST"])
-@servidor_API.route("/peliculas/<clnt_id>/comentarios/", methods=["POST"])
+@servidor_API.route("/peliculas/<clnt_id>/comentario/", methods=["POST"])
+@servidor_API.route("/peliculas/<clnt_id>/comentario", methods=["POST"])
 def comentarios_agregar_uno(clnt_id):
     if clnt_id.isnumeric():
         id = int(clnt_id)
@@ -330,8 +331,8 @@ def comentarios_agregar_uno(clnt_id):
 
         if "opinión" in clnt_data:
             comentarios.append({
-                "id": 33,
-                "película_id": 2,
+                "id": id,
+                "película_id": id,
                 "opinión": clnt_data["opinión"],
                 "usuario_id": 2
             })
@@ -341,7 +342,41 @@ def comentarios_agregar_uno(clnt_id):
             return jsonify("[err] - <opinión> debe estar presente"), HTTPStatus.BAD_REQUEST
     else:
         return jsonify("[err] - <id> debe ser entero"), HTTPStatus.BAD_REQUEST
-
+    # global ult_id_peliculas
+    # global usuario_id_auth
+    #
+    # clnt_data = request.get_json()
+    #
+    # if usuario_chequear_logged():
+    #     # if "título" in clnt_data and "año" in clnt_data and "director_id" in clnt_data:
+    #     if len(clnt_data["título"]) > 0 and len(clnt_data["año"]) > 0 and len(clnt_data["director_id"]) > 0:
+    #         ult_id_peliculas += 1
+    #
+    #         id = ult_id_peliculas
+    #         titulo = clnt_data["título"]
+    #         ano = clnt_data["año"]
+    #         director_id = clnt_data["director_id"]
+    #         genero_id = clnt_data["género"] if "género" in clnt_data else ""
+    #         sinopsis = clnt_data["sinopsis"] if "sinopsis" in clnt_data else ""
+    #         poster = clnt_data["póster"] if "póster" in clnt_data else ""
+    #         usuario_id = usuario_id_auth
+    #
+    #         peliculas.append({
+    #             "id": id,
+    #             "título": titulo,
+    #             "año": ano,
+    #             "director_id": director_id,
+    #             "género_id": genero_id,
+    #             "sinopsis": sinopsis,
+    #             "póster": poster,
+    #             "usuario_id": usuario_id
+    #         })
+    #
+    #         return jsonify("agregado: " + str(id)), HTTPStatus.CREATED
+    #     else:
+    #         return jsonify("ERROR: <título> <año> <director_id> deben estar presentes"), HTTPStatus.BAD_REQUEST
+    # else:
+    #     return jsonify("no leogueado"), HTTPStatus.FORBIDDEN
 
 # - Directores
 @servidor_API.route("/directores", methods=["GET"])

@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
 document.getElementById("agr_comentario").addEventListener('click', evento => {
         let pelicular = {
-            título: "wewettttttttttttttttt",
+            opinión: "wewettttttttttttthfgh fgh ffg fgh fhfgh fh fgh fhfgtttt",
             año: "wewe",
             director_id: "wewe",
             género_id: "wewe",
@@ -58,7 +58,7 @@ document.getElementById("agr_comentario").addEventListener('click', evento => {
             body: JSON.stringify(pelicular)
         }
 
-        fetch(URL_base + "/peliculas/ggg/ggg", request_cnf)
+        fetch(URL_base + "/peliculas/1/comentario", request_cnf)
             .then(respuesta => respuesta.json())
             .then(datos => {
 
