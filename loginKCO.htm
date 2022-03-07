@@ -20,6 +20,8 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="_js/comunKCO.js"></script>
+<script src="_js/loginKCO.js"></script>
 <link rel="stylesheet" href="_vis/principal.css">
 <link rel="shortcut icon" href="_vis/favicon.png" type="image/x-icon">
 <title></title>
@@ -27,22 +29,30 @@
 <body>
 <div id="contenedor">
     <header id="cabecera">
+        <h3>Cliente Películas API 1.0</h3>
     </header>
 
     <nav id="navegacion">
         <ul>
-            <li><a href="indexKCO.htm" class="link">Index</a></li>
-            <li><a href="loginKCO.htm" class="link">LogIn</a></li>
+            <li><a href="indexKCO.htm" class="link" id="mnuindex">Index</a></li>
+            <li><a href="agregarKCO.htm" class="link" id="mnuagregar">Agregar</a></li>
+            <li><a href="loginKCO.htm" class="link" id="mnulogin">LogIn</a></li>
         </ul>
     </nav>
 
     <main>
+        <form id="frm-login">
+            usuario <input name="usuario" type="text" id="usuario">
+            <br/>
+            clave <input name="clave" type="text" id="clave">
+        </form>
+
+        <button id="login">login</button>
     </main>
 
     <footer id="pie">
-        <h3>Cliente Películas API 1.0</h3>
+        <h4>(2022) Agustín Ascolani & Leandro M. Regolf</h4>
     </footer>
 </div>
 </body>
-<script src="_js/principal.js"></script>
 </html>

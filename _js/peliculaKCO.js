@@ -43,19 +43,14 @@ document.addEventListener("DOMContentLoaded", function(){
 
 
             document.getElementById("agr_comentario").addEventListener('click', evento => {
-                let pelicular = {
+                let opinion = {
                     opinión: "wewettttttttttttthfgh fgh ffg fgh fhfgh fh fgh fhfgtttt",
-                    año: "wewe",
-                    director_id: "wewe",
-                    género_id: "wewe",
-                    sinopsis: "wewe",
-                    póster: "wewe"
                     }
 
                 let request_cnf = {
                     method: "POST",
                     headers: {"Content-Type": "application/json"},
-                    body: JSON.stringify(pelicular)
+                    body: JSON.stringify(opinion)
                     }
 
                 fetch(URL_base + "/peliculas/" + datId +"/comentario", request_cnf)
@@ -85,39 +80,17 @@ document.addEventListener("DOMContentLoaded", function(){
                 fetch(URL_base + "/peliculas/", request_cnf)
                     .then(respuesta => respuesta.json())
                     .then(datos => {
+                        console.log(borrar);
 
-console.log(borrar);
-
-                    alert(datos);
+                        location.assign("indexKCO.htm");
                     })
-
-
-
-
                 } else {
-                    txt = "You pressed Cancel!";
+                    alert("casi...");
                 }
 
             })
-
-
-
-
-
-
-
-
-
-            //alert("weqwe");
-            })
-
-
-
-
-
-
-
-    }else{
+        })
+    } else {
          alert("nope!");;
     }
 });

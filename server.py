@@ -29,7 +29,7 @@ servidor_nombre = "Movies API server [ PrgLabII 2021 ]"
 
 
 # - - Globales - -
-usuario_id_auth = 1
+usuario_id_auth = 0
 usuario_nombre_auth = ""
 
 
@@ -97,7 +97,6 @@ def check_es_dirigida_por(pelicula, director_id):
         return False
 
 
-
 # - - Servidor - -
 servidor_API = Flask(servidor_nombre)
 cors = CORS(servidor_API, resources={r"/*/*/*": {"origins": "*"}})
@@ -106,21 +105,33 @@ servidor_API.config['CORS_HEADERS'] = 'Content-Type'
 @cross_origin(origin='*', headers=['Content-Type','Authorization'])
 
 
-
-
 # - - Entry-Points - -
 @servidor_API.route("/", methods=["GET"])
 def default():
     return servidor_nombre, HTTPStatus.OK
 
+
 # - Usuarios
-@servidor_API.route("/usuarios", methods=["GET"])
 @servidor_API.route("/usuarios/", methods=["GET"])
+@servidor_API.route("/usuarios", methods=["GET"])
 def usuarios_devolver_todos():
     if usuario_chequear_logged():
         return jsonify(usuarios), HTTPStatus.OK
     else:
         return jsonify("no leogueado"), HTTPStatus.FORBIDDEN
+
+
+@servidor_API.route("/usuario/", methods=["GET"])
+@servidor_API.route("/usuario", methods=["GET"])
+def usuarios_chequear_logged():
+    global usuario_id_auth
+    global usuario_nombre_auth
+
+    if usuario_chequear_logged():
+        return jsonify("si"), HTTPStatus.OK
+    else:
+        return jsonify("ERROR: no logueado"), HTTPStatus.UNAUTHORIZED
+
 
 @servidor_API.route("/login", methods=["POST"])
 def usuarios_devolver_login():
@@ -132,17 +143,16 @@ def usuarios_devolver_login():
                 usuario_loguear(usuario["id"], usuario["nombre"])
 
                 return jsonify("Bienvenido " + usuario["nombre"] + "!"), HTTPStatus.OK
-        return jsonify("[nfo] - <usuario> o <clave> incorrecta"), HTTPStatus.NOT_FOUND
+        return jsonify("INFO: <usuario> o <clave> incorrecta"), HTTPStatus.NOT_FOUND
     else:
-        return jsonify("[err] - request incompleto"), HTTPStatus.BAD_REQUEST
+        return jsonify("ERROR: request incompleto"), HTTPStatus.BAD_REQUEST
+
 
 @servidor_API.route("/logout", methods=["POST"])
 def usuarios_devolver_logout():
     usuario_desloguear()
 
     return jsonify("Deslogueado!"), HTTPStatus.OK
-
-
 
 
 # - Películas
@@ -152,6 +162,7 @@ def peliculas_devolver_todas():
     response = jsonify(peliculas)
 
     return response, HTTPStatus.OK
+
 
 @servidor_API.route("/peliculas/<clnt_id>", methods=["GET"])
 def peliculas_devolver_una(clnt_id):
@@ -164,7 +175,6 @@ def peliculas_devolver_una(clnt_id):
         return jsonify("[nfo] - <" + str(id) + "> no existe"), HTTPStatus.NOT_FOUND
     else:
         return jsonify("[err] - <id> debe ser entero"), HTTPStatus.BAD_REQUEST
-
 
 
 @servidor_API.route("/peliculas/directores/<clnt_id>", methods=["GET"])
@@ -222,50 +232,6 @@ def peliculas_agregar_una():
         return jsonify("no leogueado"), HTTPStatus.FORBIDDEN
 
 
-
-
-@servidor_API.route("/peliculas/ggg/comentario/", methods=["POST"])
-@servidor_API.route("/peliculas/ggg/comentario", methods=["POST"])
-def peliculas_agregar_unad():
-    global ult_id_peliculas
-    global usuario_id_auth
-
-    clnt_data = request.get_json()
-
-    if usuario_chequear_logged():
-        # if "título" in clnt_data and "año" in clnt_data and "director_id" in clnt_data:
-        if len(clnt_data["título"]) > 0 and len(clnt_data["año"]) > 0 and len(clnt_data["director_id"]) > 0:
-            ult_id_peliculas += 1
-
-            id = ult_id_peliculas
-            titulo = clnt_data["título"]
-            ano = clnt_data["año"]
-            director_id = clnt_data["director_id"]
-            genero_id = clnt_data["género"] if "género" in clnt_data else ""
-            sinopsis = clnt_data["sinopsis"] if "sinopsis" in clnt_data else ""
-            poster = clnt_data["póster"] if "póster" in clnt_data else ""
-            usuario_id = usuario_id_auth
-
-            peliculas.append({
-                "id": id,
-                "título": titulo,
-                "año": ano,
-                "director_id": director_id,
-                "género_id": genero_id,
-                "sinopsis": sinopsis,
-                "póster": poster,
-                "usuario_id": usuario_id
-            })
-
-            return jsonify("agregado: " + str(id)), HTTPStatus.CREATED
-        else:
-            return jsonify("ERROR: <título> <año> <director_id> deben estar presentes"), HTTPStatus.BAD_REQUEST
-    else:
-        return jsonify("no leogueado"), HTTPStatus.FORBIDDEN
-
-
-
-
 @servidor_API.route("/peliculas/", methods=["DELETE"])
 @servidor_API.route("/peliculas", methods=["DELETE"])
 def peliculas_borrar_una():
@@ -288,7 +254,6 @@ def peliculas_borrar_una():
             return jsonify("[err] - <id> debe estar presente"), HTTPStatus.BAD_REQUEST
     else:
         return jsonify("no leogueado"), HTTPStatus.FORBIDDEN
-
 
 
 # - Comentarios
@@ -323,6 +288,7 @@ def comentarios_devolver_por_usuario(clnt_id):
     else:
         return jsonify("[err] - <id> debe ser entero"), HTTPStatus.BAD_REQUEST
 
+
 @servidor_API.route("/peliculas/<clnt_id>/comentario/", methods=["POST"])
 @servidor_API.route("/peliculas/<clnt_id>/comentario", methods=["POST"])
 def comentarios_agregar_uno(clnt_id):
@@ -352,9 +318,6 @@ def comentarios_agregar_uno(clnt_id):
             return jsonify("ERROR: <id> debe ser entero"), HTTPStatus.BAD_REQUEST
     else:
         return jsonify("ERROR: usuario no logueado"), HTTPStatus.FORBIDDEN
-
-
-
 
 
 # - Directores
@@ -395,7 +358,6 @@ def generos_devolver_uno(clnt_id):
         return jsonify("INFO: <" + str(id) + "> no existe"), HTTPStatus.NOT_FOUND
     else:
         return jsonify("ERROR: <id> debe ser entero"), HTTPStatus.BAD_REQUEST
-
 
 
 servidor_API.run()
