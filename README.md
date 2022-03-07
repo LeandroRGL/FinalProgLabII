@@ -8,7 +8,7 @@ Crear una plataforma web para mantener una lista de películas recomendadas por 
 - Servidor API ■□□
 - CORS ■■□
 - Data inicial JSON archivos externos ■■■
-- Servicos básicos○●
+- Servicos básicos○●░▒▓█
   - Sistema de log-in ■□□<br/>
     &nbsp;&nbsp;&nbsp;localhost:5000/login&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;localhost:5000/logout
 - Otros servicios
@@ -20,13 +20,10 @@ Crear una plataforma web para mantener una lista de películas recomendadas por 
     &nbsp;&nbsp;&nbsp;localhost:5000/
   - Devolver las películas que tienen imagen de portada agregada □□□<br/>
     &nbsp;&nbsp;&nbsp;localhost:5000/peliculas/con_portada&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;localhost:5000/peliculas/con_portada/
-  - ABM de cada película □□□<br/>
-    &nbsp;&nbsp;&nbsp;ALTA:&nbsp;&nbsp;&nbsp;localhost:5000/<br/>
-    &nbsp;&nbsp;&nbsp;BAJA:&nbsp;&nbsp;&nbsp;localhost:5000/<br/>
-    &nbsp;&nbsp;&nbsp;MODIF:&nbsp;&nbsp;&nbsp;localhost:5000/<br/>
-
-
-
+  - ABM de cada película<br/>
+    &nbsp;&nbsp;&nbsp;ALTA:&nbsp;&nbsp;&nbsp;localhost:5000/peliculas ■□□<br/>
+    &nbsp;&nbsp;&nbsp;BAJA:&nbsp;&nbsp;&nbsp;localhost:5000/peliculas ■■□<br/>
+    &nbsp;&nbsp;&nbsp;MODIF:&nbsp;&nbsp;&nbsp;localhost:5000/peliculas □□□<br/>
 
 ### Front-end
 - Diseño básico ■□□
@@ -36,9 +33,6 @@ Crear una plataforma web para mantener una lista de películas recomendadas por 
 - Página LogIn □□□
 - Página principal ■□□
 - Página película ■□□
-
-
-
 
 ### Recursos
 - https://www.imdb.com/

@@ -266,8 +266,8 @@ def peliculas_agregar_unad():
 
 
 
-@servidor_API.route("/peliculas", methods=["DELETE"])
 @servidor_API.route("/peliculas/", methods=["DELETE"])
+@servidor_API.route("/peliculas", methods=["DELETE"])
 def peliculas_borrar_una():
     clnt_data = request.get_json()
 
@@ -276,7 +276,9 @@ def peliculas_borrar_una():
     if usuario_chequear_logged():
         if "id" in clnt_data:
             for i in range(len(peliculas)):
-                if peliculas[i]["id"] == id:
+                print(type(id))
+                print(type(peliculas[i]["id"]))
+                if peliculas[i]["id"] == int(id):
                     pelicula_eliminada = peliculas.pop(i)
 
                     return jsonify(pelicula_eliminada), HTTPStatus.OK
@@ -324,59 +326,36 @@ def comentarios_devolver_por_usuario(clnt_id):
 @servidor_API.route("/peliculas/<clnt_id>/comentario/", methods=["POST"])
 @servidor_API.route("/peliculas/<clnt_id>/comentario", methods=["POST"])
 def comentarios_agregar_uno(clnt_id):
-    if clnt_id.isnumeric():
-        id = int(clnt_id)
+    global ult_id_comentarios
+    global usuario_id_auth
 
-        clnt_data = request.get_json()
+    clnt_data = request.get_json()
 
-        if "opinión" in clnt_data:
-            comentarios.append({
-                "id": id,
-                "película_id": id,
-                "opinión": clnt_data["opinión"],
-                "usuario_id": 2
-            })
+    if usuario_chequear_logged():
+        if clnt_id.isnumeric():
+            ult_id_comentarios += 1
 
-            return jsonify(clnt_data), HTTPStatus.CREATED
+            id = int(clnt_id)
+
+            if "opinión" in clnt_data:
+                comentarios.append({
+                    "id": ult_id_comentarios,
+                    "película_id": id,
+                    "opinión": clnt_data["opinión"],
+                    "usuario_id": usuario_id_auth
+                })
+
+                return jsonify(clnt_data), HTTPStatus.CREATED
+            else:
+                return jsonify("ERROR: <id> <opinión> deben estar presentes"), HTTPStatus.BAD_REQUEST
         else:
-            return jsonify("[err] - <opinión> debe estar presente"), HTTPStatus.BAD_REQUEST
+            return jsonify("ERROR: <id> debe ser entero"), HTTPStatus.BAD_REQUEST
     else:
-        return jsonify("[err] - <id> debe ser entero"), HTTPStatus.BAD_REQUEST
-    # global ult_id_peliculas
-    # global usuario_id_auth
-    #
-    # clnt_data = request.get_json()
-    #
-    # if usuario_chequear_logged():
-    #     # if "título" in clnt_data and "año" in clnt_data and "director_id" in clnt_data:
-    #     if len(clnt_data["título"]) > 0 and len(clnt_data["año"]) > 0 and len(clnt_data["director_id"]) > 0:
-    #         ult_id_peliculas += 1
-    #
-    #         id = ult_id_peliculas
-    #         titulo = clnt_data["título"]
-    #         ano = clnt_data["año"]
-    #         director_id = clnt_data["director_id"]
-    #         genero_id = clnt_data["género"] if "género" in clnt_data else ""
-    #         sinopsis = clnt_data["sinopsis"] if "sinopsis" in clnt_data else ""
-    #         poster = clnt_data["póster"] if "póster" in clnt_data else ""
-    #         usuario_id = usuario_id_auth
-    #
-    #         peliculas.append({
-    #             "id": id,
-    #             "título": titulo,
-    #             "año": ano,
-    #             "director_id": director_id,
-    #             "género_id": genero_id,
-    #             "sinopsis": sinopsis,
-    #             "póster": poster,
-    #             "usuario_id": usuario_id
-    #         })
-    #
-    #         return jsonify("agregado: " + str(id)), HTTPStatus.CREATED
-    #     else:
-    #         return jsonify("ERROR: <título> <año> <director_id> deben estar presentes"), HTTPStatus.BAD_REQUEST
-    # else:
-    #     return jsonify("no leogueado"), HTTPStatus.FORBIDDEN
+        return jsonify("ERROR: usuario no logueado"), HTTPStatus.FORBIDDEN
+
+
+
+
 
 # - Directores
 @servidor_API.route("/directores", methods=["GET"])

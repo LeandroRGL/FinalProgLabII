@@ -26,7 +26,7 @@
         "director_id": 1,
         "género_id": 3,
         "sinopsis": "una sipnopsips",
-        "póster": "",
+        "póster": "https://cdn.shopify.com/s/files/1/0057/3728/3618/products/46815c4dfdacd3596370f3ae074b4091_6da6eb9b-9490-45db-9140-7d9fd5efb153_480x.progressive.jpg",
         "usuario_id": 2
     },
     {
@@ -36,7 +36,7 @@
         "director_id": 2,
         "género_id": 3,
         "sinopsis": "Scharzenneger",
-        "póster": "ww",
+        "póster": "https://cdn.shopify.com/s/files/1/0057/3728/3618/products/12b35893d435e2905bb33def6f164ee5_94e3de26-35c7-4bea-852d-9d2cc0bcbb13_480x.progressive.jpg",
         "usuario_id": 2
     },
     {

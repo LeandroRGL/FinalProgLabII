@@ -35,39 +35,70 @@ document.addEventListener("DOMContentLoaded", function(){
                 for (let c = 0; c < comentarios.length; c++) {
                     let new_div_comentario = document.createElement('div');
                     new_div_comentario.classList.add("comentario");
-                    new_div_comentario.innerHTML = comentarios[c].opinión;
+                    new_div_comentario.innerHTML = comentarios[c].opinión + " (por " + comentarios[c].usuario_id + ")";
 
                     div_comentarios.appendChild(new_div_comentario);
                     }
                 })
 
 
-document.getElementById("agr_comentario").addEventListener('click', evento => {
-        let pelicular = {
-            opinión: "wewettttttttttttthfgh fgh ffg fgh fhfgh fh fgh fhfgtttt",
-            año: "wewe",
-            director_id: "wewe",
-            género_id: "wewe",
-            sinopsis: "wewe",
-            póster: "wewe"
-        }
+            document.getElementById("agr_comentario").addEventListener('click', evento => {
+                let pelicular = {
+                    opinión: "wewettttttttttttthfgh fgh ffg fgh fhfgh fh fgh fhfgtttt",
+                    año: "wewe",
+                    director_id: "wewe",
+                    género_id: "wewe",
+                    sinopsis: "wewe",
+                    póster: "wewe"
+                    }
 
-        let request_cnf = {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(pelicular)
-        }
+                let request_cnf = {
+                    method: "POST",
+                    headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify(pelicular)
+                    }
 
-        fetch(URL_base + "/peliculas/1/comentario", request_cnf)
-            .then(respuesta => respuesta.json())
-            .then(datos => {
+                fetch(URL_base + "/peliculas/" + datId +"/comentario", request_cnf)
+                    .then(respuesta => respuesta.json())
+                    .then(datos => {
 
-            console.log(datos);
+                    console.log(datos);
+
+                    alert(datos);
+                    })
+                })
 
 
-            alert(datos);
+            document.getElementById("brr_pelicula").addEventListener('click', evento => {
+                if (window.confirm("¿Seguro desea borrar esta película?")) {
+
+                let borrar = {
+                    id: datId
+                    }
+
+                let request_cnf = {
+                    method: "DELETE",
+                    headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify(borrar)
+                    }
+
+                fetch(URL_base + "/peliculas/", request_cnf)
+                    .then(respuesta => respuesta.json())
+                    .then(datos => {
+
+console.log(borrar);
+
+                    alert(datos);
+                    })
+
+
+
+
+                } else {
+                    txt = "You pressed Cancel!";
+                }
+
             })
-})
 
 
 
@@ -76,14 +107,13 @@ document.getElementById("agr_comentario").addEventListener('click', evento => {
 
 
 
-            alert("weqwe");
+
+            //alert("weqwe");
             })
 
 
 
-        document.getElementById("brr_pelicula").addEventListener('click', evento => {
-            alert("fsdfsdfsdfweqwe");
-            })
+
 
 
 
