@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
 
             document.getElementById("edt_pelicula").addEventListener('click', evento => {
-                    location.assign("editarKCO.htm?=" + datId);
+                    location.assign("editarKCO.htm?id=" + datId);
                 })
 
 

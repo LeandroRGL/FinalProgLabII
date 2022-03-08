@@ -120,7 +120,7 @@ def usuarios_devolver_todos():
     if usuario_chequear_logged():
         return jsonify(usuarios), HTTPStatus.OK
     else:
-        return jsonify("no leogueado"), HTTPStatus.FORBIDDEN
+        return jsonify("ERROR: no logueado"), HTTPStatus.FORBIDDEN
 
 
 @servidor_API.route("/usuario/", methods=["GET"])
@@ -179,9 +179,9 @@ def peliculas_devolver_una(clnt_id):
         for pelicula in peliculas:
             if pelicula["id"] == id:
                 return jsonify(pelicula), HTTPStatus.OK
-        return jsonify("[nfo] - <" + str(id) + "> no existe"), HTTPStatus.NOT_FOUND
+        return jsonify("ERROR: <" + str(id) + "> no existe"), HTTPStatus.NOT_FOUND
     else:
-        return jsonify("[err] - <id> debe ser entero"), HTTPStatus.BAD_REQUEST
+        return jsonify("ERROR: <id> debe ser entero"), HTTPStatus.BAD_REQUEST
 
 
 @servidor_API.route("/peliculas/director/<clnt_id>", methods=["GET"])
@@ -236,7 +236,46 @@ def peliculas_agregar_una():
                 "usuario_id": usuario_id
             })
 
-            return jsonify("agregado: " + str(id)), HTTPStatus.CREATED
+            return jsonify("INFO: agregado: " + str(id)), HTTPStatus.CREATED
+        else:
+            return jsonify("ERROR: <título> <año> <director_id> deben estar presentes"), HTTPStatus.BAD_REQUEST
+    else:
+        return jsonify("ERROR: no logueado"), HTTPStatus.FORBIDDEN
+
+
+@servidor_API.route("/peliculas/<clnt_id>", methods=["PUT"])
+def peliculas_modificar_una(clnt_id):
+    global ult_id_peliculas
+    global usuario_id_auth
+
+    clnt_data = request.get_json()
+
+    if usuario_chequear_logged():
+    #     # if "título" in clnt_data and "año" in clnt_data and "director_id" in clnt_data:
+        if len(clnt_data["título"]) > 0 and len(clnt_data["año"]) > 0 and len(clnt_data["director_id"]) > 0:
+    #         ult_id_peliculas += 1
+    #
+    #         id = ult_id_peliculas
+    #         titulo = clnt_data["título"]
+    #         ano = clnt_data["año"]
+    #         director_id = clnt_data["director_id"]
+    #         genero_id = clnt_data["género"] if "género" in clnt_data else ""
+    #         sinopsis = clnt_data["sinopsis"] if "sinopsis" in clnt_data else ""
+    #         poster = clnt_data["póster"] if "póster" in clnt_data else ""
+    #         usuario_id = usuario_id_auth
+    #
+    #         peliculas.append({
+    #             "id": id,
+    #             "título": titulo,
+    #             "año": ano,
+    #             "director_id": director_id,
+    #             "género_id": genero_id,
+    #             "sinopsis": sinopsis,
+    #             "póster": poster,
+    #             "usuario_id": usuario_id
+    #         })
+
+            return jsonify("INFO: agregado: " + str(id)), HTTPStatus.CREATED
         else:
             return jsonify("ERROR: <título> <año> <director_id> deben estar presentes"), HTTPStatus.BAD_REQUEST
     else:
@@ -262,11 +301,11 @@ def peliculas_borrar_una():
                         return jsonify("eliminada"), HTTPStatus.OK
                     else:
                         return jsonify("no es de su autoría"), HTTPStatus.FORBIDDEN
-            return jsonify("[nfo] - <" + str(id) + "> no existe"), HTTPStatus.NOT_FOUND
+            return jsonify("INFO: <" + str(id) + "> no existe"), HTTPStatus.NOT_FOUND
         else:
-            return jsonify("[err] - <id> debe estar presente"), HTTPStatus.BAD_REQUEST
+            return jsonify("INFO: <id> debe estar presente"), HTTPStatus.BAD_REQUEST
     else:
-        return jsonify("no logueado"), HTTPStatus.FORBIDDEN
+        return jsonify("ERROR: no logueado"), HTTPStatus.FORBIDDEN
 
 
 # - Comentarios

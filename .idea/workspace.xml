@@ -4,13 +4,9 @@
     <list default="true" id="2e79c709-62da-4071-ae66-11b69d2167a8" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_js/agregarKCO.js" beforeDir="false" afterPath="$PROJECT_DIR$/_js/agregarKCO.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_js/indexKCO.js" beforeDir="false" afterPath="$PROJECT_DIR$/_js/indexKCO.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_js/editarKCO.js" beforeDir="false" afterPath="$PROJECT_DIR$/_js/editarKCO.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_js/loginKCO.js" beforeDir="false" afterPath="$PROJECT_DIR$/_js/loginKCO.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_js/peliculaKCO.js" beforeDir="false" afterPath="$PROJECT_DIR$/_js/peliculaKCO.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/agregarKCO.htm" beforeDir="false" afterPath="$PROJECT_DIR$/agregarKCO.htm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/loginKCO.htm" beforeDir="false" afterPath="$PROJECT_DIR$/loginKCO.htm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logoutKCO.htm" beforeDir="false" afterPath="$PROJECT_DIR$/logoutKCO.htm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/peliculaKCO.htm" beforeDir="false" afterPath="$PROJECT_DIR$/peliculaKCO.htm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/server.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -80,5 +76,16 @@
       <updated>1645814270151</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

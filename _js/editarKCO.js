@@ -1,4 +1,10 @@
 document.addEventListener("DOMContentLoaded", function(){
+
+
+
+
+
+
     fetch(URL_base + "/directores/")
         .then(respuesta => respuesta.json())
         .then(directores => {
@@ -17,6 +23,12 @@ document.addEventListener("DOMContentLoaded", function(){
 
             elemento.textContent = opcion;
             elemento.value = valor;
+
+
+                if (valor == 5){
+                    elemento.selected = true;
+                }
+
 
             select.appendChild(elemento);
             }
@@ -41,6 +53,10 @@ document.addEventListener("DOMContentLoaded", function(){
             elemento.textContent = opcion;
             elemento.value = valor;
 
+                if (valor == 2){
+                    elemento.selected = true;
+                }
+
             select.appendChild(elemento);
             }
         })
@@ -62,8 +78,60 @@ document.addEventListener("DOMContentLoaded", function(){
         elemento.textContent = opcion;
         elemento.value = valor;
 
+                if (valor == 1973){
+                    elemento.selected = true;
+                }
+
         select.appendChild(elemento);
         }
+
+
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        var id;
+
+        if (urlParams.has("id")){
+
+                const datId = urlParams.get("id");
+
+        fetch(URL_base + "/peliculas/" + datId)
+            .then(respuesta => respuesta.json())
+            .then(pelicula => {
+//            document.getElementById("titulo").innerHTML = "(" + pelicula.año + ") " + pelicula.título;
+//            document.getElementById("poster").src = pelicula.póster;
+//            document.getElementById("sinopsis").innerHTML = pelicula.sinopsis;
+
+
+
+
+
+   //document.getElementById("director").selectedIndex = 2;
+
+//Array.from(document.querySelector("director").options).forEach(function(option_element) {
+//    let option_value = option_element.value;
+//
+//
+////
+//    console.log('Option Value : ' + option_value);
+////
+//
+//    console.log("\n\r");
+//});
+
+
+
+document.getElementById("titulo").value = pelicula.título;
+document.getElementById("sinopsis").value = pelicula.sinopsis;
+document.getElementById("poster").value = pelicula.póster;
+
+            console.log(datId);
+            console.log(pelicula);
+            })
+            }
+        else{
+            console.log("nope");
+            }
+
 
 
     var edt_pelicula = document.getElementById("edt_pelicula");
@@ -86,12 +154,12 @@ document.addEventListener("DOMContentLoaded", function(){
         }
 
         let request_cnf = {
-            method: "POST",
+            method: "PUT",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(pelicula)
         }
 
-        fetch(URL_base + "/peliculas/", request_cnf)
+        fetch(URL_base + "/peliculas/" + id, request_cnf)
             .then(respuesta => respuesta.json())
             .then(datos => {
 
@@ -117,15 +185,6 @@ document.addEventListener("DOMContentLoaded", function(){
         document.getElementById("sinopsis").value = "";
         document.getElementById("poster").value = "";
 
-        const queryString = window.location.search;
-        const urlParams = new URLSearchParams(queryString);
 
-        if (urlParams.has("id")){
-            const id = urlParams.get("id");
-            console.log(id);
-            }
-        else{
-            console.log("nope");
-            }
     })
 });
