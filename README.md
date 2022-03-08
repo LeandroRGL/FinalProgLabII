@@ -29,14 +29,18 @@ Crear una plataforma web para mantener una lista de películas recomendadas por 
 ### Front-end
 - Diseño básico (CSS precario) ■□□
 - Diseño responsivo (CSS ausente) □□□
-- Consulta básica GET ■■■
-- Consulta básica POST ■■■
-- Página LogIn (loginKCO.htm) ■■□
-- Página LogOut (logoutKCO.htm) ■■□
-- Página principal (indexKCO.htm) ■□□
-  - Listar películas (NO logueado) ■■□
-  - Listar películas (SI logueado) ■■□
-  - Listar películas por director ■■□
+- Consulta básicas
+  - GET ■■■
+  - POST ■■■
+  - PUT ■■□
+  - DELETE ■■□
+- LogIn / LogOut
+  - LogIn (loginKCO.htm) ■■□
+  - LogOut (logoutKCO.htm) ■■□
+- Página principal (indexKCO.htm)
+  - Películas (NO logueado) ■■□
+  - Películas (SI logueado) ■■□
+  - Películas por director ■■□
 - Película (peliculaKCO.htm)
   - ver ■■□
   - agregar comentario (precario) ■□□

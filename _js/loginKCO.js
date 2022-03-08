@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function(){
                 document.getElementById("usuario").value = "";
                 document.getElementById("clave").value = "";
 
-                console.log(datos);
+                //console.log(datos);
 
                 alert(datos);
 
