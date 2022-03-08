@@ -66,9 +66,9 @@ document.addEventListener("DOMContentLoaded", function(){
         }
 
 
-    var add_pelicula = document.getElementById("add_pelicula");
+    var edt_pelicula = document.getElementById("edt_pelicula");
 
-    add_pelicula.addEventListener('click', evento => {
+    edt_pelicula.addEventListener('click', evento => {
         let datTitulo = document.getElementById("titulo").value;
         let datAno = document.getElementById("ano").value;
         let datDirector = document.getElementById("director").value;

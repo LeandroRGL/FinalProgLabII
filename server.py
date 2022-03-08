@@ -240,12 +240,14 @@ def peliculas_agregar_una():
         else:
             return jsonify("ERROR: <título> <año> <director_id> deben estar presentes"), HTTPStatus.BAD_REQUEST
     else:
-        return jsonify("no leogueado"), HTTPStatus.FORBIDDEN
+        return jsonify("ERROR: no logueado"), HTTPStatus.FORBIDDEN
 
 
 @servidor_API.route("/peliculas/", methods=["DELETE"])
 @servidor_API.route("/peliculas", methods=["DELETE"])
 def peliculas_borrar_una():
+    global usuario_id_auth
+
     clnt_data = request.get_json()
 
     id = clnt_data["id"]
@@ -253,18 +255,18 @@ def peliculas_borrar_una():
     if usuario_chequear_logged():
         if "id" in clnt_data:
             for i in range(len(peliculas)):
-                print(type(id))
-                print(type(peliculas[i]["id"]))
                 if peliculas[i]["id"] == int(id):
-                    pelicula_eliminada = peliculas.pop(i)
+                    if peliculas[i]["usuario_id"] == usuario_id_auth:
+                        pelicula_eliminada = peliculas.pop(i)
 
-                    return jsonify(pelicula_eliminada), HTTPStatus.OK
-
+                        return jsonify("eliminada"), HTTPStatus.OK
+                    else:
+                        return jsonify("no es de su autoría"), HTTPStatus.FORBIDDEN
             return jsonify("[nfo] - <" + str(id) + "> no existe"), HTTPStatus.NOT_FOUND
         else:
             return jsonify("[err] - <id> debe estar presente"), HTTPStatus.BAD_REQUEST
     else:
-        return jsonify("no leogueado"), HTTPStatus.FORBIDDEN
+        return jsonify("no logueado"), HTTPStatus.FORBIDDEN
 
 
 # - Comentarios

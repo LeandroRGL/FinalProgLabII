@@ -42,6 +42,11 @@ document.addEventListener("DOMContentLoaded", function(){
                 })
 
 
+            document.getElementById("edt_pelicula").addEventListener('click', evento => {
+                    location.assign("editarKCO.htm?=" + datId);
+                })
+
+
             document.getElementById("agr_comentario").addEventListener('click', evento => {
                 let opinion = {
                     opinión: "wewettttttttttttthfgh fgh ffg fgh fhfgh fh fgh fhfgtttt",
@@ -80,9 +85,16 @@ document.addEventListener("DOMContentLoaded", function(){
                 fetch(URL_base + "/peliculas/", request_cnf)
                     .then(respuesta => respuesta.json())
                     .then(datos => {
-                        console.log(borrar);
 
-                        location.assign("indexKCO.htm");
+                        if (datos.includes("eliminada")){
+                            console.log(borrar);
+                            location.assign("indexKCO.htm");
+                        } else {
+                            alert(datos);
+                        }
+
+
+
                     })
                 } else {
                     alert("casi...");

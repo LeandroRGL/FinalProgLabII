@@ -41,6 +41,8 @@ document.addEventListener("DOMContentLoaded", function(){
 
             for (let g = 0; g < peliculas.length; g++) {
                 let div_principal = document.getElementById('principal');
+
+
                 let new_div_pelicula = document.createElement('div');
                 new_div_pelicula.setAttribute("id", peliculas[g].id);
                 new_div_pelicula.classList.add("pelicula");
