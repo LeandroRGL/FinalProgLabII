@@ -31,6 +31,16 @@
     },
     {
         "id": 4,
+        "título": "Blade Runner",
+        "año": 1982,
+        "director_id": 3,
+        "género_id": 3,
+        "sinopsis": "Humanos fabricados en laboratorio",
+        "póster": "https://cdn.shopify.com/s/files/1/0057/3728/3618/products/d9f6067d2406a7cfbf42a5fc4ae4cd9d_8174831c-db77-4608-9ae2-44aca8f2a6f5_480x.progressive.jpg",
+        "usuario_id": 1
+    },
+    {
+        "id": 5,
         "título": "Total Recall",
         "año": 1990,
         "director_id": 2,
@@ -40,13 +50,53 @@
         "usuario_id": 2
     },
     {
-        "id": 5,
-        "título": "Blade Runner",
-        "año": 1982,
+        "id": 6,
+        "título": "Body of lies",
+        "año": 2008,
         "director_id": 3,
         "género_id": 3,
-        "sinopsis": "Humanos fabricados en laboratorio",
-        "póster": "https://cdn.shopify.com/s/files/1/0057/3728/3618/products/d9f6067d2406a7cfbf42a5fc4ae4cd9d_8174831c-db77-4608-9ae2-44aca8f2a6f5_480x.progressive.jpg",
-        "usuario_id": 1
+        "sinopsis": "",
+        "póster": "https://cdn.shopify.com/s/files/1/0057/3728/3618/products/112900026f123255e2584681b4962c2c_95c79ca2-9f16-4fca-a50a-29973653cfd1_480x.progressive.jpg",
+        "usuario_id": 4
+    },
+    {
+        "id": 7,
+        "título": "Alien",
+        "año": 1979,
+        "director_id": 3,
+        "género_id": 3,
+        "sinopsis": "",
+        "póster": "https://cdn.shopify.com/s/files/1/0057/3728/3618/products/ffd005c1c156c002d6318d24e08c3e60_027e0963-448d-457f-a46b-5db0550dc0c1_480x.progressive.jpg",
+        "usuario_id": 4
+    },
+    {
+        "id": 8,
+        "título": "El cuento de las comadrejas",
+        "año": 2019,
+        "director_id": 5,
+        "género_id": 5,
+        "sinopsis": "",
+        "póster": "",
+        "usuario_id": 4
+    },
+    {
+        "id": 9,
+        "título": "Gladiator",
+        "año": 2000,
+        "director_id": 3,
+        "género_id": 3,
+        "sinopsis": "",
+        "póster": "https://cdn.shopify.com/s/files/1/0057/3728/3618/products/2fb2fa7a5a0a022982abcf77771317bc_cdf2419f-5bd3-4d3e-98a2-94588c9b79cf_480x.progressive.jpg",
+        "usuario_id": 3
+    },
+    {
+        "id": 10,
+        "título": "El secreto de sus ojos",
+        "año": 2009,
+        "director_id": 5,
+        "género_id": 1,
+        "sinopsis": "¿Qué es Racing para usted? ¡Racing es una pasión! ¡Una pasión es una pasión!",
+        "póster": "",
+        "usuario_id": 3
     }
 ]

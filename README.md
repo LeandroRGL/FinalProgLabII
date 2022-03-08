@@ -9,7 +9,7 @@ Crear una plataforma web para mantener una lista de películas recomendadas por 
 - CORS ■■□
 - Data inicial JSON archivos externos ■■■
 - Servicos básicos
-  - Sistema de log-in ■□□<br/>
+  - Sistema de log-in ■■□<br/>
     &nbsp;&nbsp;&nbsp;/login&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;/logout
 - Otros servicios
   - Devolver la lista de directores presentes en la plataforma ■■□<br/>
@@ -26,8 +26,8 @@ Crear una plataforma web para mantener una lista de películas recomendadas por 
     &nbsp;&nbsp;&nbsp;MODIF:&nbsp;&nbsp;&nbsp;/peliculas □□□<br/>
 
 ### Front-end
-- Diseño básico ■□□
-- Diseño responsivo □□□
+- Diseño básico (CSS precario) ■□□
+- Diseño responsivo (CSS ausente) □□□
 - Consulta básica GET ■■□
 - Consulta básica POST ■■□
 - Página LogIn (loginKCO.htm) ■■□
@@ -35,11 +35,17 @@ Crear una plataforma web para mantener una lista de películas recomendadas por 
 - Página principal (indexKCO.htm) ■□□
 - Película (peliculaKCO.htm) ■□□
   - ver ■■□
-  - agregar comentario ■■□
+  - agregar comentario (precario) ■□□
   - borrar ■■□
 - Película (agregarKCO.htm) ■□□
   - alta ■□□
   - modificar □□□
+
+### Puntuales
+- Listado películas (público) ■■□
+- Listado películas (loguado) ■■□
+- Ver película (público) ■□□
+- Ver película (logueado) ■□□
 
 ### Recursos
 - https://www.imdb.com/

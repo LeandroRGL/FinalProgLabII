@@ -32,6 +32,8 @@ servidor_nombre = "Movies API server [ PrgLabII 2021 ]"
 usuario_id_auth = 0
 usuario_nombre_auth = ""
 
+peliculas_a_nologueados = 4
+
 
 # - - Data inicial - -
 ruta_actual = os.path.dirname(__file__)
@@ -159,7 +161,12 @@ def usuarios_devolver_logout():
 @servidor_API.route("/peliculas", methods=["GET"])
 @servidor_API.route("/peliculas/", methods=["GET"])
 def peliculas_devolver_todas():
-    response = jsonify(peliculas)
+    if (usuario_chequear_logged() == True):
+        rspPeliculas = peliculas
+    else:
+        rspPeliculas = peliculas[peliculas_a_nologueados * (-1):]
+
+    response = jsonify(rspPeliculas)
 
     return response, HTTPStatus.OK
 
@@ -177,12 +184,16 @@ def peliculas_devolver_una(clnt_id):
         return jsonify("[err] - <id> debe ser entero"), HTTPStatus.BAD_REQUEST
 
 
-@servidor_API.route("/peliculas/directores/<clnt_id>", methods=["GET"])
+@servidor_API.route("/peliculas/director/<clnt_id>", methods=["GET"])
 def peliculas_devolver_por_director(clnt_id):
-    # peliculas_dirigida_por = list(filter(check_es_dirigida_por(2), peliculas))
+    if clnt_id.isnumeric():
+        id = int(clnt_id)
 
-    return jsonify("peliculas_dirigida_por"), HTTPStatus.BAD_REQUEST
+        rspPeliculas = [p for p in peliculas if p["director_id"] == id]
 
+        return jsonify(rspPeliculas), HTTPStatus.OK
+    else:
+        return jsonify("ERROR: <id> debe ser entero"), HTTPStatus.BAD_REQUEST
 
 @servidor_API.route("/peliculas/con_portada", methods=["GET"])
 @servidor_API.route("/peliculas/con_portada/", methods=["GET"])
@@ -321,8 +332,8 @@ def comentarios_agregar_uno(clnt_id):
 
 
 # - Directores
-@servidor_API.route("/directores", methods=["GET"])
 @servidor_API.route("/directores/", methods=["GET"])
+@servidor_API.route("/directores", methods=["GET"])
 def directores_devolver_todos():
     return jsonify(directores), HTTPStatus.OK
 
