@@ -79,9 +79,13 @@ document.addEventListener("DOMContentLoaded", function(){
                 })
 
 
+
+
             document.getElementById("agr_comentario").addEventListener("click", evento => {
+                let datOpinion = document.getElementById("comentario").value;
+
                 let opinion = {
-                    opinión: "wewettttttttttttthfgh fgh ffg fgh fhfgh fh fgh fhfgtttt",
+                    opinión: datOpinion
                     }
 
                 let request_cnf = {
@@ -98,7 +102,11 @@ document.addEventListener("DOMContentLoaded", function(){
 
                     alert(datos);
                     })
+
+                alert(opinion);
                 })
+
+
 
 
             document.getElementById("brr_pelicula").addEventListener("click", evento => {
@@ -126,6 +134,31 @@ document.addEventListener("DOMContentLoaded", function(){
                         }
 
                     })
+
+
+
+
+
+            document.getElementById("agr_comentariogg").addEventListener("click", evento => {
+                let opinion = document.getElementById("comentario").value;
+
+                let request_cnf = {
+                    method: "POST",
+                    headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify(opinion)
+                    }
+
+                fetch(URL_base + "/peliculas/" + datId +"/comentario", request_cnf)
+                    .then(respuesta => respuesta.json())
+                    .then(datos => {
+
+                    console.log(datos);
+
+                    alert(datos);
+                    })
+                })
+
+
                 } else {
                     alert("casi...");
                 }

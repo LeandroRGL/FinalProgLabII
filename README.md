@@ -43,7 +43,7 @@ Crear una plataforma web para mantener una lista de películas recomendadas por 
   - Películas por director ■■□
 - Película (peliculaKCO.htm)
   - ver ■■□
-  - agregar comentario (precario) ■□□
+  - agregar comentario (precario) ■■□
   - borrar ■■□
 - Película (agregarKCO.htm)
   - alta ■□□
