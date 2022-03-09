@@ -39,26 +39,34 @@ peliculas_a_nologueados = 4
 ruta_actual = os.path.dirname(__file__)
 ruta_data = ruta_actual + "/__data/"
 
-with open(os.path.join(ruta_data, 'usuarios.json'), 'r', encoding="utf-8") as data_JSON:
+ruta_data_usuarios = os.path.join(ruta_data, "usuarios.json")
+ruta_data_peliculas = os.path.join(ruta_data, "peliculas.json")
+ruta_data_directores = os.path.join(ruta_data, "directores.json")
+ruta_data_generos = os.path.join(ruta_data, "generos.json")
+ruta_data_comentarios = os.path.join(ruta_data, "comentarios.json")
+
+
+with open(ruta_data_usuarios, "r", encoding="utf-16") as data_JSON:
     usuarios = json.load(data_JSON)
 
-with open(os.path.join(ruta_data, 'peliculas.json'), 'r', encoding="utf-8") as data_JSON:
+with open(ruta_data_peliculas, "r", encoding="utf-16") as data_JSON:
     peliculas = json.load(data_JSON)
 
-with open(os.path.join(ruta_data, 'directores.json'), 'r', encoding="utf-8") as data_JSON:
+with open(ruta_data_directores, "r", encoding="utf-16") as data_JSON:
     directores = json.load(data_JSON)
 
-with open(os.path.join(ruta_data, 'generos.json'), 'r', encoding="utf-8") as data_JSON:
+with open(ruta_data_generos, "r", encoding="utf-16") as data_JSON:
     generos = json.load(data_JSON)
 
-with open(os.path.join(ruta_data, 'comentarios.json'), 'r', encoding="utf-8") as data_JSON:
+with open(ruta_data_comentarios, "r", encoding="utf-16") as data_JSON:
     comentarios = json.load(data_JSON)
 
-ult_id_usuarios = 3
-ult_id_peliculas = 5
-ult_id_directores = 4
-ult_id_generos = 5
-ult_id_comentarios = 4
+
+ult_id_usuarios = len(usuarios)
+ult_id_peliculas = len(peliculas)
+ult_id_directores = len(directores)
+ult_id_generos = len(generos)
+ult_id_comentarios = len(comentarios)
 
 
 # - - Funciones - -
@@ -233,6 +241,10 @@ def peliculas_agregar_una():
                 "póster": poster,
                 "usuario_id": usuario_id
             })
+
+            objArchivo = open(ruta_data_peliculas, "w", encoding="utf-16")
+            objArchivo.write(json.dumps(peliculas, indent=4, ensure_ascii=False))
+            objArchivo.close()
 
             return jsonify("INFO: película agregada: " + str(id)), HTTPStatus.CREATED
         else:

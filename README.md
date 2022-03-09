@@ -7,7 +7,9 @@ Crear una plataforma web para mantener una lista de películas recomendadas por 
 ### Back-end
 - Servidor API (server.py) (URLBase -> localhost:5000) ■■■
 - CORS ■■■
-- Data inicial JSON archivos externos ■■■
+- Data JSON mediante archivos externos
+  - Lectura ■■■
+  - Escritura ■■■
 - Servicos básicos
   - Sistema de log-in ■■□<br/>
     &nbsp;&nbsp;&nbsp;/login&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;/logout
@@ -55,6 +57,9 @@ Crear una plataforma web para mantener una lista de películas recomendadas por 
 - Listado películas (loguado) ■■□
 - Ver película (público) ■□□
 - Ver película (logueado) ■□□
+
+### Extras
+- Se implementó persitencia de datos leyendo y guardando datos JSON en archivos externos ■■■
 
 ### Recursos
 - https://www.imdb.com/
