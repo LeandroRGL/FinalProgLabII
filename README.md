@@ -22,7 +22,7 @@ Crear una plataforma web para mantener una lista de películas recomendadas por 
     &nbsp;&nbsp;&nbsp;/peliculas/con_portada&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;/peliculas/con_portada/
   - ABM de cada película<br/>
     &nbsp;&nbsp;&nbsp;ALTA:&nbsp;&nbsp;&nbsp;/peliculas ■■□<br/>
-    &nbsp;&nbsp;&nbsp;BAJA:&nbsp;&nbsp;&nbsp;/peliculas ■■□<br/>
+    &nbsp;&nbsp;&nbsp;BAJA:&nbsp;&nbsp;&nbsp;/peliculas ■■■<br/>
     &nbsp;&nbsp;&nbsp;MODIF:&nbsp;&nbsp;&nbsp;/peliculas ■□□<br/>
   - Agregar comentarios ■□□<br/>
 
@@ -33,7 +33,7 @@ Crear una plataforma web para mantener una lista de películas recomendadas por 
   - GET ■■■
   - POST ■■■
   - PUT ■■□
-  - DELETE ■■□
+  - DELETE ■■■
 - LogIn / LogOut
   - LogIn (loginKCO.htm) ■■□
   - LogOut (logoutKCO.htm) ■■□
@@ -44,7 +44,7 @@ Crear una plataforma web para mantener una lista de películas recomendadas por 
 - Película (peliculaKCO.htm)
   - ver ■■□
   - agregar comentario ■■□
-  - borrar ■■□
+  - borrar ■■■
 - Película (agregarKCO.htm)
   - alta ■□□
 - Película (modificarKCO.htm)

@@ -85,18 +85,13 @@ def usuario_chequear_logged():
     else:
         return False
 
+def checkear_comentarios_foraneos(datUsuario_id, datPelicula_id):
+    for i in range(len(comentarios)):
+        print(comentarios[i])
 
-def check_tiene_poster(pelicula):
-    if len(pelicula["póster"]) > 0:
-        return True
-    else:
-        return False
-
-def check_es_dirigida_por(pelicula, director_id):
-    if pelicula["director_id"] == director_id:
-        return True
-    else:
-        return False
+        if int(comentarios[i]["película_id"]) == int(datPelicula_id) and int(comentarios[i]["usuario_id"]) != int(datUsuario_id):
+            return True
+    return False
 
 
 # - - Servidor - -
@@ -160,8 +155,8 @@ def usuarios_devolver_logout():
 
 
 # - Películas
-@servidor_API.route("/peliculas", methods=["GET"])
 @servidor_API.route("/peliculas/", methods=["GET"])
+@servidor_API.route("/peliculas", methods=["GET"])
 def peliculas_devolver_todas():
     if (usuario_chequear_logged() == True):
         rspPeliculas = peliculas
@@ -201,14 +196,13 @@ def peliculas_devolver_por_director(clnt_id):
 @servidor_API.route("/peliculas/con_portada/", methods=["GET"])
 @servidor_API.route("/peliculas/con_portada", methods=["GET"])
 def peliculas_devolver_con_poster():
-    peliculas_con_poster = list(filter(check_tiene_poster, peliculas))
     rspPeliculas = [p for p in peliculas if len(p["póster"]) > 0]
 
     return jsonify(rspPeliculas), HTTPStatus.OK
 
 
-@servidor_API.route("/peliculas", methods=["POST"])
 @servidor_API.route("/peliculas/", methods=["POST"])
+@servidor_API.route("/peliculas", methods=["POST"])
 def peliculas_agregar_una():
     global ult_id_peliculas
     global usuario_id_auth
@@ -240,7 +234,7 @@ def peliculas_agregar_una():
                 "usuario_id": usuario_id
             })
 
-            return jsonify("INFO: agregado: " + str(id)), HTTPStatus.CREATED
+            return jsonify("INFO: película agregada: " + str(id)), HTTPStatus.CREATED
         else:
             return jsonify("ERROR: <título> <año> <director_id> deben estar presentes"), HTTPStatus.BAD_REQUEST
     else:
@@ -257,10 +251,7 @@ def peliculas_modificar_una(clnt_id):
     clnt_data = request.get_json()
 
     if usuario_chequear_logged():
-    #     # if "título" in clnt_data and "año" in clnt_data and "director_id" in clnt_data:
         if len(clnt_data["título"]) > 0 and len(clnt_data["año"]) > 0 and len(clnt_data["director_id"]) > 0:
-
-            # for pelicula in peliculas:
             for i in range(len(peliculas)):
                 if peliculas[i]["id"] == id:
                     titulo = clnt_data["título"]
@@ -277,8 +268,9 @@ def peliculas_modificar_una(clnt_id):
                     peliculas[i]["sinopsis"] = sinopsis
                     peliculas[i]["póster"] = poster
 
-                    return jsonify("seaaaaa!"), HTTPStatus.OK
+                    return jsonify("INFO: película actualizada!"), HTTPStatus.OK
 
+            return jsonify("ERROR: película no encontrada"), HTTPStatus.NOT_FOUND
         else:
             return jsonify("ERROR: <título> <año> <director_id> deben estar presentes"), HTTPStatus.BAD_REQUEST
     else:
@@ -299,9 +291,12 @@ def peliculas_borrar_una():
             for i in range(len(peliculas)):
                 if peliculas[i]["id"] == int(id):
                     if peliculas[i]["usuario_id"] == usuario_id_auth:
-                        pelicula_eliminada = peliculas.pop(i)
+                        if checkear_comentarios_foraneos(usuario_id_auth, id):
+                            return jsonify("ERROR: no puede eliminarse, comentarios foráneos"), HTTPStatus.FORBIDDEN
+                        else:
+                            pelicula_eliminada = peliculas.pop(i)
 
-                        return jsonify("INFO: película eliminada"), HTTPStatus.OK
+                            return jsonify("INFO: película eliminada"), HTTPStatus.OK
                     else:
                         return jsonify("ERROR: no es de su autoría"), HTTPStatus.FORBIDDEN
             return jsonify("INFO: <" + str(id) + "> no existe"), HTTPStatus.NOT_FOUND
