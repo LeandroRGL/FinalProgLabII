@@ -6,48 +6,80 @@ document.addEventListener("DOMContentLoaded", function(){
         const datId = urlParams.get("id");
 
         fetch(URL_base + "/peliculas/" + datId)
-            .then(respuesta => respuesta.json())
-            .then(pelicula => {
+        .then(respuesta => respuesta.json())
+        .then(pelicula => {
             document.getElementById("titulo").innerHTML = "(" + pelicula.año + ") " + pelicula.título;
             document.getElementById("poster").src = pelicula.póster;
             document.getElementById("sinopsis").innerHTML = pelicula.sinopsis;
 
 
             fetch(URL_base + "/peliculas/" + pelicula.director_id + "/directores/")
-                .then(respuesta => respuesta.json())
-                .then(director => {
+            .then(respuesta => respuesta.json())
+            .then(director => {
                 document.getElementById("director").innerHTML = director;
                 })
 
 
             fetch(URL_base + "/peliculas/" + pelicula.género_id + "/generos/")
-                .then(respuesta => respuesta.json())
-                .then(genero => {
+            .then(respuesta => respuesta.json())
+            .then(genero => {
                 document.getElementById("genero").innerHTML = genero;
                 })
 
 
             fetch(URL_base + "/peliculas/" + datId + "/comentarios")
+            .then(respuesta => respuesta.json())
+            .then(comentarios => {
+                fetch(URL_base + "/usuarios/")
                 .then(respuesta => respuesta.json())
-                .then(comentarios => {
-                let div_comentarios = document.getElementById("comentarios");
+                .then(usuarios => {
+                    let div_comentarios = document.getElementById("comentarios");
 
-                for (let c = 0; c < comentarios.length; c++) {
-                    let new_div_comentario = document.createElement('div');
-                    new_div_comentario.classList.add("comentario");
-                    new_div_comentario.innerHTML = comentarios[c].opinión + " (por " + comentarios[c].usuario_id + ")";
+                    for (let c = 0; c < comentarios.length; c++) {
+                        let new_div_comentario = document.createElement("div");
+                        new_div_comentario.classList.add("comentario");
+                        new_div_comentario.innerHTML = comentarios[c].opinión;
 
-                    div_comentarios.appendChild(new_div_comentario);
+
+                        div_comentarios.appendChild(new_div_comentario);
+
+
+                    for (let u = 0; u < usuarios.length; u++){
+                        if (String(comentarios[c].usuario_id) == String(usuarios[u].id)){
+                            let ssdiv_comentarios = document.getElementsByClassName("comentario")[c];
+                            let new_p_usuario = document.createElement("p");
+
+                            new_p_usuario.classList.add("usr");
+                            new_p_usuario.innerText = "(por " + usuarios[u].nombre + ")";
+
+                            div_comentarios.appendChild(new_p_usuario);
+                        }
                     }
+                }
+
+
+
+
+
                 })
 
 
-            document.getElementById("edt_pelicula").addEventListener('click', evento => {
+
+
+
+            })
+
+
+
+
+
+
+            document.getElementById("edt_pelicula").addEventListener("click", evento => {
                     location.assign("editarKCO.htm?id=" + datId);
                 })
 
 
-            document.getElementById("agr_comentario").addEventListener('click', evento => {
+            document.getElementById("agr_comentario").addEventListener("click", evento => {
                 let opinion = {
                     opinión: "wewettttttttttttthfgh fgh ffg fgh fhfgh fh fgh fhfgtttt",
                     }
@@ -69,7 +101,7 @@ document.addEventListener("DOMContentLoaded", function(){
                 })
 
 
-            document.getElementById("brr_pelicula").addEventListener('click', evento => {
+            document.getElementById("brr_pelicula").addEventListener("click", evento => {
                 if (window.confirm("¿Seguro desea borrar esta película?")) {
 
                 let borrar = {
@@ -92,8 +124,6 @@ document.addEventListener("DOMContentLoaded", function(){
                         } else {
                             alert(datos);
                         }
-
-
 
                     })
                 } else {

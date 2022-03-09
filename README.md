@@ -18,12 +18,12 @@ Crear una plataforma web para mantener una lista de películas recomendadas por 
     &nbsp;&nbsp;&nbsp;/generos&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;/generos/
   - Devolver la lista de películas dirigidas por un director en particular ■■■<br/>
     &nbsp;&nbsp;&nbsp;/peliculas/director/<id>
-  - Devolver las películas que tienen imagen de portada agregada □□□<br/>
+  - Devolver las películas que tienen imagen de portada agregada ■■■<br/>
     &nbsp;&nbsp;&nbsp;/peliculas/con_portada&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;/peliculas/con_portada/
   - ABM de cada película<br/>
     &nbsp;&nbsp;&nbsp;ALTA:&nbsp;&nbsp;&nbsp;/peliculas ■□□<br/>
     &nbsp;&nbsp;&nbsp;BAJA:&nbsp;&nbsp;&nbsp;/peliculas ■■□<br/>
-    &nbsp;&nbsp;&nbsp;MODIF:&nbsp;&nbsp;&nbsp;/peliculas □□□<br/>
+    &nbsp;&nbsp;&nbsp;MODIF:&nbsp;&nbsp;&nbsp;/peliculas ■□□<br/>
   - Agregar comentarios ■□□<br/>
 
 ### Front-end

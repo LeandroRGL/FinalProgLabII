@@ -29,7 +29,7 @@ servidor_nombre = "Movies API server [ PrgLabII 2021 ]"
 
 
 # - - Globales - -
-usuario_id_auth = 0
+usuario_id_auth = 1
 usuario_nombre_auth = ""
 
 peliculas_a_nologueados = 4
@@ -118,7 +118,9 @@ def default():
 @servidor_API.route("/usuarios", methods=["GET"])
 def usuarios_devolver_todos():
     if usuario_chequear_logged():
-        return jsonify(usuarios), HTTPStatus.OK
+        rspUsuarios = [{k: v for k, v in d.items() if k != "clave"} for d in usuarios]
+
+        return jsonify(rspUsuarios), HTTPStatus.OK
     else:
         return jsonify("ERROR: no logueado"), HTTPStatus.FORBIDDEN
 
@@ -195,12 +197,14 @@ def peliculas_devolver_por_director(clnt_id):
     else:
         return jsonify("ERROR: <id> debe ser entero"), HTTPStatus.BAD_REQUEST
 
-@servidor_API.route("/peliculas/con_portada", methods=["GET"])
-@servidor_API.route("/peliculas/con_portada/", methods=["GET"])
-def peliculas_devolver_con_poster(clnt_id):
-    peliculas_con_poster = list(filter(check_tiene_poster, peliculas))
 
-    return jsonify(peliculas_con_poster), HTTPStatus.OK
+@servidor_API.route("/peliculas/con_portada/", methods=["GET"])
+@servidor_API.route("/peliculas/con_portada", methods=["GET"])
+def peliculas_devolver_con_poster():
+    peliculas_con_poster = list(filter(check_tiene_poster, peliculas))
+    rspPeliculas = [p for p in peliculas if len(p["póster"]) > 0]
+
+    return jsonify(rspPeliculas), HTTPStatus.OK
 
 
 @servidor_API.route("/peliculas", methods=["POST"])
@@ -248,34 +252,33 @@ def peliculas_modificar_una(clnt_id):
     global ult_id_peliculas
     global usuario_id_auth
 
+    id = int(clnt_id)
+
     clnt_data = request.get_json()
 
     if usuario_chequear_logged():
     #     # if "título" in clnt_data and "año" in clnt_data and "director_id" in clnt_data:
         if len(clnt_data["título"]) > 0 and len(clnt_data["año"]) > 0 and len(clnt_data["director_id"]) > 0:
-    #         ult_id_peliculas += 1
-    #
-    #         id = ult_id_peliculas
-    #         titulo = clnt_data["título"]
-    #         ano = clnt_data["año"]
-    #         director_id = clnt_data["director_id"]
-    #         genero_id = clnt_data["género"] if "género" in clnt_data else ""
-    #         sinopsis = clnt_data["sinopsis"] if "sinopsis" in clnt_data else ""
-    #         poster = clnt_data["póster"] if "póster" in clnt_data else ""
-    #         usuario_id = usuario_id_auth
-    #
-    #         peliculas.append({
-    #             "id": id,
-    #             "título": titulo,
-    #             "año": ano,
-    #             "director_id": director_id,
-    #             "género_id": genero_id,
-    #             "sinopsis": sinopsis,
-    #             "póster": poster,
-    #             "usuario_id": usuario_id
-    #         })
 
-            return jsonify("INFO: agregado: " + str(id)), HTTPStatus.CREATED
+            # for pelicula in peliculas:
+            for i in range(len(peliculas)):
+                if peliculas[i]["id"] == id:
+                    titulo = clnt_data["título"]
+                    ano = clnt_data["año"]
+                    director_id = clnt_data["director_id"]
+                    genero_id = clnt_data["género_id"] if "género_id" in clnt_data else ""
+                    sinopsis = clnt_data["sinopsis"] if "sinopsis" in clnt_data else ""
+                    poster = clnt_data["póster"] if "póster" in clnt_data else ""
+
+                    peliculas[i]["título"] = titulo
+                    peliculas[i]["año"] = ano
+                    peliculas[i]["director_id"] = director_id
+                    peliculas[i]["género_id"] = genero_id
+                    peliculas[i]["sinopsis"] = sinopsis
+                    peliculas[i]["póster"] = poster
+
+                    return jsonify("seaaaaa!"), HTTPStatus.OK
+
         else:
             return jsonify("ERROR: <título> <año> <director_id> deben estar presentes"), HTTPStatus.BAD_REQUEST
     else:

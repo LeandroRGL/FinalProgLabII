@@ -1,14 +1,14 @@
 document.addEventListener("DOMContentLoaded", function(){
     fetch(URL_base + "/directores/")
-        .then(respuesta => respuesta.json())
-        .then(directores => {
+    .then(respuesta => respuesta.json())
+    .then(directores => {
         let select = document.getElementById("director");
 
         for (let d = -1; d < directores.length; d++){
             if (d == -1){
                 var opcion = "";
                 var valor = "";
-            }else{
+            } else {
                 var opcion = directores[d].nombre;
                 var valor = directores[d].id;
             }
@@ -23,15 +23,15 @@ document.addEventListener("DOMContentLoaded", function(){
         })
 
     fetch(URL_base + "/generos/")
-        .then(respuesta => respuesta.json())
-        .then(generos => {
+    .then(respuesta => respuesta.json())
+    .then(generos => {
         let select = document.getElementById("genero");
 
         for (let g = -1; g < generos.length; g++){
             if (g == -1){
                 var opcion = "";
                 var valor = "";
-            }else{
+            } else {
                 var opcion = generos[g].denominación;
                 var valor = generos[g].id;
             }
@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function(){
         if (a == 1887){
             var opcion = "";
             var valor = "";
-        }else{
+        } else {
             var opcion = a;
             var valor = a;
         }
@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
     var add_pelicula = document.getElementById("add_pelicula");
 
-    add_pelicula.addEventListener('click', evento => {
+    add_pelicula.addEventListener("click", evento => {
         let datTitulo = document.getElementById("titulo").value;
         let datAno = document.getElementById("ano").value;
         let datDirector = document.getElementById("director").value;
@@ -99,16 +99,7 @@ document.addEventListener("DOMContentLoaded", function(){
                     alert(datos);
                     location.assign("indexKCO.htm");
                 }
-
-            //console.log(datos);
-
-
-            //alert(datos);
             })
-
-
-        console.log(pelicula);
-
 
         document.getElementById("titulo").value = "";
         document.getElementById("ano").value = "";
@@ -116,16 +107,5 @@ document.addEventListener("DOMContentLoaded", function(){
         document.getElementById("genero").value = "";
         document.getElementById("sinopsis").value = "";
         document.getElementById("poster").value = "";
-
-        const queryString = window.location.search;
-        const urlParams = new URLSearchParams(queryString);
-
-        if (urlParams.has("id")){
-            const id = urlParams.get("id");
-            console.log(id);
-            }
-        else{
-            console.log("nope");
-            }
     })
 });
