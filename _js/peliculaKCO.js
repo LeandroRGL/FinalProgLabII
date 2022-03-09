@@ -17,14 +17,14 @@ document.addEventListener("DOMContentLoaded", function(){
             .then(respuesta => respuesta.json())
             .then(director => {
                 document.getElementById("director").innerHTML = director;
-                })
+            })
 
 
             fetch(URL_base + "/peliculas/" + pelicula.género_id + "/generos/")
             .then(respuesta => respuesta.json())
             .then(genero => {
                 document.getElementById("genero").innerHTML = genero;
-                })
+            })
 
 
             fetch(URL_base + "/peliculas/" + datId + "/comentarios")
@@ -56,29 +56,13 @@ document.addEventListener("DOMContentLoaded", function(){
                         }
                     }
                 }
-
-
-
-
-
                 })
-
-
-
-
-
             })
 
 
-
-
-
-
             document.getElementById("edt_pelicula").addEventListener("click", evento => {
-                    location.assign("editarKCO.htm?id=" + datId);
-                })
-
-
+                location.assign("editarKCO.htm?id=" + datId);
+            })
 
 
             document.getElementById("agr_comentario").addEventListener("click", evento => {
@@ -97,75 +81,51 @@ document.addEventListener("DOMContentLoaded", function(){
                 fetch(URL_base + "/peliculas/" + datId +"/comentario", request_cnf)
                     .then(respuesta => respuesta.json())
                     .then(datos => {
+                        document.getElementById("comentario").value = "";
 
-                    console.log(datos);
+                        let div_comentarios = document.getElementById("comentarios");
 
-                    alert(datos);
+                        let new_div_comentario = document.createElement("div");
+                        new_div_comentario.classList.add("comentario");
+                        new_div_comentario.innerHTML = datOpinion;
+
+                        div_comentarios.appendChild(new_div_comentario);
+
+                        alert(datos);
                     })
-
-                alert(opinion);
                 })
-
-
 
 
             document.getElementById("brr_pelicula").addEventListener("click", evento => {
                 if (window.confirm("¿Seguro desea borrar esta película?")) {
 
-                let borrar = {
-                    id: datId
+                    let borrar = {
+                        id: datId
                     }
 
-                let request_cnf = {
-                    method: "DELETE",
-                    headers: {"Content-Type": "application/json"},
-                    body: JSON.stringify(borrar)
-                    }
+                    let request_cnf = {
+                        method: "DELETE",
+                        headers: {"Content-Type": "application/json"},
+                        body: JSON.stringify(borrar)
+                        }
 
-                fetch(URL_base + "/peliculas/", request_cnf)
+                    fetch(URL_base + "/peliculas/", request_cnf)
                     .then(respuesta => respuesta.json())
                     .then(datos => {
-
                         if (datos.includes("eliminada")){
-                            console.log(borrar);
+                            alert(datos);
+
                             location.assign("indexKCO.htm");
                         } else {
                             alert(datos);
                         }
-
                     })
-
-
-
-
-
-            document.getElementById("agr_comentariogg").addEventListener("click", evento => {
-                let opinion = document.getElementById("comentario").value;
-
-                let request_cnf = {
-                    method: "POST",
-                    headers: {"Content-Type": "application/json"},
-                    body: JSON.stringify(opinion)
-                    }
-
-                fetch(URL_base + "/peliculas/" + datId +"/comentario", request_cnf)
-                    .then(respuesta => respuesta.json())
-                    .then(datos => {
-
-                    console.log(datos);
-
-                    alert(datos);
-                    })
-                })
-
-
                 } else {
                     alert("casi...");
                 }
-
             })
         })
     } else {
-         alert("nope!");;
+        alert("nope!");;
     }
 });

@@ -301,9 +301,9 @@ def peliculas_borrar_una():
                     if peliculas[i]["usuario_id"] == usuario_id_auth:
                         pelicula_eliminada = peliculas.pop(i)
 
-                        return jsonify("eliminada"), HTTPStatus.OK
+                        return jsonify("INFO: película eliminada"), HTTPStatus.OK
                     else:
-                        return jsonify("no es de su autoría"), HTTPStatus.FORBIDDEN
+                        return jsonify("ERROR: no es de su autoría"), HTTPStatus.FORBIDDEN
             return jsonify("INFO: <" + str(id) + "> no existe"), HTTPStatus.NOT_FOUND
         else:
             return jsonify("INFO: <id> debe estar presente"), HTTPStatus.BAD_REQUEST
@@ -316,6 +316,7 @@ def peliculas_borrar_una():
 @servidor_API.route("/comentarios/", methods=["GET"])
 def comentarios_devolver_todos():
     return jsonify(comentarios), HTTPStatus.OK
+
 
 @servidor_API.route("/peliculas/<clnt_id>/comentarios", methods=["GET"])
 @servidor_API.route("/peliculas/<clnt_id>/comentarios/", methods=["GET"])
@@ -366,7 +367,7 @@ def comentarios_agregar_uno(clnt_id):
                     "usuario_id": usuario_id_auth
                 })
 
-                return jsonify(clnt_data), HTTPStatus.CREATED
+                return jsonify("INFO: opinión agregada!"), HTTPStatus.CREATED
             else:
                 return jsonify("ERROR: <id> <opinión> deben estar presentes"), HTTPStatus.BAD_REQUEST
         else:
@@ -380,6 +381,7 @@ def comentarios_agregar_uno(clnt_id):
 @servidor_API.route("/directores", methods=["GET"])
 def directores_devolver_todos():
     return jsonify(directores), HTTPStatus.OK
+
 
 @servidor_API.route("/peliculas/<clnt_id>/directores", methods=["GET"])
 @servidor_API.route("/peliculas/<clnt_id>/directores/", methods=["GET"])
@@ -400,6 +402,7 @@ def directores_devolver_uno(clnt_id):
 @servidor_API.route("/generos/", methods=["GET"])
 def generos_devolver_todos():
     return jsonify(generos), HTTPStatus.OK
+
 
 @servidor_API.route("/peliculas/<clnt_id>/generos", methods=["GET"])
 @servidor_API.route("/peliculas/<clnt_id>/generos/", methods=["GET"])

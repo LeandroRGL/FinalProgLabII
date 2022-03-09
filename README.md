@@ -21,7 +21,7 @@ Crear una plataforma web para mantener una lista de películas recomendadas por 
   - Devolver las películas que tienen imagen de portada agregada ■■■<br/>
     &nbsp;&nbsp;&nbsp;/peliculas/con_portada&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;/peliculas/con_portada/
   - ABM de cada película<br/>
-    &nbsp;&nbsp;&nbsp;ALTA:&nbsp;&nbsp;&nbsp;/peliculas ■□□<br/>
+    &nbsp;&nbsp;&nbsp;ALTA:&nbsp;&nbsp;&nbsp;/peliculas ■■□<br/>
     &nbsp;&nbsp;&nbsp;BAJA:&nbsp;&nbsp;&nbsp;/peliculas ■■□<br/>
     &nbsp;&nbsp;&nbsp;MODIF:&nbsp;&nbsp;&nbsp;/peliculas ■□□<br/>
   - Agregar comentarios ■□□<br/>
@@ -43,7 +43,7 @@ Crear una plataforma web para mantener una lista de películas recomendadas por 
   - Películas por director ■■□
 - Película (peliculaKCO.htm)
   - ver ■■□
-  - agregar comentario (precario) ■■□
+  - agregar comentario ■■□
   - borrar ■■□
 - Película (agregarKCO.htm)
   - alta ■□□
