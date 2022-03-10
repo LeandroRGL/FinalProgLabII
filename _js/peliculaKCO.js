@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function(){
     if (urlParams.has("id")){
         const datId = urlParams.get("id");
 
-        fetch(URL_base + "/peliculas/" + datId)
+        fetch(URL_base + "/pelicula/" + datId)
         .then(respuesta => respuesta.json())
         .then(pelicula => {
             document.getElementById("titulo").innerHTML = "(" + pelicula.año + ") " + pelicula.título;
@@ -13,21 +13,21 @@ document.addEventListener("DOMContentLoaded", function(){
             document.getElementById("sinopsis").innerHTML = pelicula.sinopsis;
 
 
-            fetch(URL_base + "/peliculas/" + pelicula.director_id + "/directores/")
+            fetch(URL_base + "/director/" + pelicula.director_id)
             .then(respuesta => respuesta.json())
             .then(director => {
                 document.getElementById("director").innerHTML = director;
             })
 
 
-            fetch(URL_base + "/peliculas/" + pelicula.género_id + "/generos/")
+            fetch(URL_base + "/genero/" + pelicula.género_id)
             .then(respuesta => respuesta.json())
             .then(genero => {
                 document.getElementById("genero").innerHTML = genero;
             })
 
 
-            fetch(URL_base + "/peliculas/" + datId + "/comentarios")
+            fetch(URL_base + "/pelicula/" + datId + "/comentarios")
             .then(respuesta => respuesta.json())
             .then(comentarios => {
                 fetch(URL_base + "/usuarios/")
@@ -44,18 +44,18 @@ document.addEventListener("DOMContentLoaded", function(){
                         div_comentarios.appendChild(new_div_comentario);
 
 
-                    for (let u = 0; u < usuarios.length; u++){
-                        if (String(comentarios[c].usuario_id) == String(usuarios[u].id)){
-                            let ssdiv_comentarios = document.getElementsByClassName("comentario")[c];
-                            let new_p_usuario = document.createElement("p");
+                        for (let u = 0; u < usuarios.length; u++){
+                            if (String(comentarios[c].usuario_id) == String(usuarios[u].id)){
+                                let ssdiv_comentarios = document.getElementsByClassName("comentario")[c];
+                                let new_p_usuario = document.createElement("p");
 
-                            new_p_usuario.classList.add("usr");
-                            new_p_usuario.innerText = "(por " + usuarios[u].nombre + ")";
+                                new_p_usuario.classList.add("usr");
+                                new_p_usuario.innerText = "(por " + usuarios[u].nombre + ")";
 
-                            div_comentarios.appendChild(new_p_usuario);
+                                div_comentarios.appendChild(new_p_usuario);
+                            }
                         }
                     }
-                }
                 })
             })
 
@@ -68,36 +68,42 @@ document.addEventListener("DOMContentLoaded", function(){
             document.getElementById("agr_comentario").addEventListener("click", evento => {
                 let datOpinion = document.getElementById("comentario").value;
 
-                let opinion = {
-                    opinión: datOpinion
-                    }
+                if (datOpinion.length > 0){
+                    let opinion = {
+                        opinión: datOpinion
+                        }
 
-                let request_cnf = {
-                    method: "POST",
-                    headers: {"Content-Type": "application/json"},
-                    body: JSON.stringify(opinion)
-                    }
+                    let request_cnf = {
+                        method: "POST",
+                        headers: {"Content-Type": "application/json"},
+                        body: JSON.stringify(opinion)
+                        }
 
-                fetch(URL_base + "/peliculas/" + datId +"/comentario", request_cnf)
+                    fetch(URL_base + "/pelicula/" + datId +"/comentario", request_cnf)
                     .then(respuesta => respuesta.json())
                     .then(datos => {
                         document.getElementById("comentario").value = "";
 
-                        let div_comentarios = document.getElementById("comentarios");
+                        if (datos.includes("agregada")){
+                            let div_comentarios = document.getElementById("comentarios");
 
-                        let new_div_comentario = document.createElement("div");
-                        new_div_comentario.classList.add("comentario");
-                        new_div_comentario.innerHTML = datOpinion;
+                            let new_div_comentario = document.createElement("div");
+                            new_div_comentario.classList.add("comentario");
+                            new_div_comentario.innerHTML = datOpinion;
 
-                        div_comentarios.appendChild(new_div_comentario);
+                            div_comentarios.appendChild(new_div_comentario);
+                        }
 
                         alert(datos);
                     })
-                })
+                } else {
+                    alert("Comentario vacío no macho! Ponele actitud...");
+                }
+            })
 
 
             document.getElementById("brr_pelicula").addEventListener("click", evento => {
-                if (window.confirm("¿Seguro desea borrar esta película?")) {
+                if (window.confirm("¿Seguro desea borrar esta película?")){
 
                     let borrar = {
                         id: datId
@@ -109,7 +115,7 @@ document.addEventListener("DOMContentLoaded", function(){
                         body: JSON.stringify(borrar)
                         }
 
-                    fetch(URL_base + "/peliculas/", request_cnf)
+                    fetch(URL_base + "/pelicula/", request_cnf)
                     .then(respuesta => respuesta.json())
                     .then(datos => {
                         if (datos.includes("eliminada")){
@@ -126,6 +132,6 @@ document.addEventListener("DOMContentLoaded", function(){
             })
         })
     } else {
-        alert("nope!");;
+        alert("nope!");
     }
 });

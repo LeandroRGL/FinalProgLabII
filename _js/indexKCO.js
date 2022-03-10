@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
 
         if (prmdirector == 0){
-            var URL_API = "/peliculas/";
+            var URL_API = "/peliculas";
         } else {
             var URL_API = "/peliculas/director/" + prmdirector;
         }
@@ -36,14 +36,14 @@ document.addEventListener("DOMContentLoaded", function(){
         fetch(URL_base + URL_API)
         .then(respuesta => respuesta.json())
         .then(peliculas => {
-            let div_principal = document.getElementById('principal');
+            let div_principal = document.getElementById("principal");
             div_principal.innerHTML = "";
 
             for (let g = 0; g < peliculas.length; g++) {
-                let div_principal = document.getElementById('principal');
+                let div_principal = document.getElementById("principal");
 
 
-                let new_div_pelicula = document.createElement('div');
+                let new_div_pelicula = document.createElement("div");
                 new_div_pelicula.setAttribute("id", peliculas[g].id);
                 new_div_pelicula.classList.add("pelicula");
 
@@ -51,21 +51,21 @@ document.addEventListener("DOMContentLoaded", function(){
 
 
                 let div_pelicula = document.getElementById(peliculas[g].id);
-                let new_poster = document.createElement('img');
+                let new_poster = document.createElement("img");
                 new_poster.classList.add("titulo");
                 new_poster.src = peliculas[g].póster;
 
                 div_pelicula.appendChild(new_poster);
 
 
-                let new_titulo = document.createElement('div');
+                let new_titulo = document.createElement("div");
                 new_titulo.classList.add("titulo");
                 new_titulo.innerHTML = "(" + peliculas[g].año + ") " + peliculas[g].título;
 
                 div_pelicula.appendChild(new_titulo);
 
 
-                let new_link = document.createElement('a');
+                let new_link = document.createElement("a");
                 new_link.classList.add("button");
                 new_link.href = "peliculaKCO.htm?id=" + peliculas[g].id;
                 new_link.innerHTML = "ver detalles";
@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
     var directores = document.getElementById("mnudirector");
 
-    directores.addEventListener('change', evento => {
+    directores.addEventListener("change", evento => {
         let director_id = directores.value;
 
         directores.options.length = 0;

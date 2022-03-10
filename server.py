@@ -29,10 +29,10 @@ servidor_nombre = "Movies API server [ PrgLabII 2021 ]"
 
 
 # - - Globales - -
-usuario_id_auth = 1
+usuario_id_auth = 0
 usuario_nombre_auth = ""
 
-peliculas_a_nologueados = 4
+cantidad_peliculas_a_nologueados = 4
 
 
 # - - Data inicial - -
@@ -95,8 +95,6 @@ def usuario_chequear_logged():
 
 def checkear_comentarios_foraneos(datUsuario_id, datPelicula_id):
     for i in range(len(comentarios)):
-        print(comentarios[i])
-
         if int(comentarios[i]["película_id"]) == int(datPelicula_id) and int(comentarios[i]["usuario_id"]) != int(datUsuario_id):
             return True
     return False
@@ -120,12 +118,9 @@ def default():
 @servidor_API.route("/usuarios/", methods=["GET"])
 @servidor_API.route("/usuarios", methods=["GET"])
 def usuarios_devolver_todos():
-    if usuario_chequear_logged():
-        rspUsuarios = [{k: v for k, v in d.items() if k != "clave"} for d in usuarios]
+    rspUsuarios = [{k: v for k, v in d.items() if k != "clave"} for d in usuarios]
 
-        return jsonify(rspUsuarios), HTTPStatus.OK
-    else:
-        return jsonify("ERROR: no logueado"), HTTPStatus.FORBIDDEN
+    return jsonify(rspUsuarios), HTTPStatus.OK
 
 
 @servidor_API.route("/usuario/", methods=["GET"])
@@ -140,7 +135,7 @@ def usuarios_chequear_logged():
         return jsonify("ERROR: no logueado"), HTTPStatus.UNAUTHORIZED
 
 
-@servidor_API.route("/login", methods=["POST"])
+@servidor_API.route("/usuario/login", methods=["POST"])
 def usuarios_devolver_login():
     clnt_data = request.get_json()
 
@@ -155,7 +150,7 @@ def usuarios_devolver_login():
         return jsonify("ERROR: request incompleto"), HTTPStatus.BAD_REQUEST
 
 
-@servidor_API.route("/logout", methods=["POST"])
+@servidor_API.route("/usuario/logout", methods=["POST"])
 def usuarios_devolver_logout():
     usuario_desloguear()
 
@@ -169,14 +164,14 @@ def peliculas_devolver_todas():
     if (usuario_chequear_logged() == True):
         rspPeliculas = peliculas
     else:
-        rspPeliculas = peliculas[peliculas_a_nologueados * (-1):]
+        rspPeliculas = peliculas[cantidad_peliculas_a_nologueados * (-1):]
 
     response = jsonify(rspPeliculas)
 
     return response, HTTPStatus.OK
 
 
-@servidor_API.route("/peliculas/<clnt_id>", methods=["GET"])
+@servidor_API.route("/pelicula/<clnt_id>", methods=["GET"])
 def peliculas_devolver_una(clnt_id):
     if clnt_id.isnumeric():
         id = int(clnt_id)
@@ -194,7 +189,7 @@ def peliculas_devolver_por_director(clnt_id):
     if clnt_id.isnumeric():
         id = int(clnt_id)
 
-        rspPeliculas = [p for p in peliculas if p["director_id"] == id]
+        rspPeliculas = [p for p in peliculas if str(p["director_id"]) == str(id)]
 
         return jsonify(rspPeliculas), HTTPStatus.OK
     else:
@@ -209,8 +204,8 @@ def peliculas_devolver_con_poster():
     return jsonify(rspPeliculas), HTTPStatus.OK
 
 
-@servidor_API.route("/peliculas/", methods=["POST"])
-@servidor_API.route("/peliculas", methods=["POST"])
+@servidor_API.route("/pelicula/", methods=["POST"])
+@servidor_API.route("/pelicula", methods=["POST"])
 def peliculas_agregar_una():
     global ult_id_peliculas
     global usuario_id_auth
@@ -218,7 +213,6 @@ def peliculas_agregar_una():
     clnt_data = request.get_json()
 
     if usuario_chequear_logged():
-        # if "título" in clnt_data and "año" in clnt_data and "director_id" in clnt_data:
         if len(clnt_data["título"]) > 0 and len(clnt_data["año"]) > 0 and len(clnt_data["director_id"]) > 0:
             ult_id_peliculas += 1
 
@@ -226,7 +220,7 @@ def peliculas_agregar_una():
             titulo = clnt_data["título"]
             ano = clnt_data["año"]
             director_id = clnt_data["director_id"]
-            genero_id = clnt_data["género"] if "género" in clnt_data else ""
+            genero_id = clnt_data["género_id"] if "género_id" in clnt_data else ""
             sinopsis = clnt_data["sinopsis"] if "sinopsis" in clnt_data else ""
             poster = clnt_data["póster"] if "póster" in clnt_data else ""
             usuario_id = usuario_id_auth
@@ -250,10 +244,10 @@ def peliculas_agregar_una():
         else:
             return jsonify("ERROR: <título> <año> <director_id> deben estar presentes"), HTTPStatus.BAD_REQUEST
     else:
-        return jsonify("ERROR: no logueado"), HTTPStatus.FORBIDDEN
+        return jsonify("ERROR: debe loguearse para agregar esta película"), HTTPStatus.FORBIDDEN
 
 
-@servidor_API.route("/peliculas/<clnt_id>", methods=["PUT"])
+@servidor_API.route("/pelicula/<clnt_id>", methods=["PUT"])
 def peliculas_modificar_una(clnt_id):
     global ult_id_peliculas
     global usuario_id_auth
@@ -280,17 +274,21 @@ def peliculas_modificar_una(clnt_id):
                     peliculas[i]["sinopsis"] = sinopsis
                     peliculas[i]["póster"] = poster
 
+                    objArchivo = open(ruta_data_peliculas, "w", encoding="utf-16")
+                    objArchivo.write(json.dumps(peliculas, indent=4, ensure_ascii=False))
+                    objArchivo.close()
+
                     return jsonify("INFO: película actualizada!"), HTTPStatus.OK
 
             return jsonify("ERROR: película no encontrada"), HTTPStatus.NOT_FOUND
         else:
             return jsonify("ERROR: <título> <año> <director_id> deben estar presentes"), HTTPStatus.BAD_REQUEST
     else:
-        return jsonify("ERROR: no logueado"), HTTPStatus.FORBIDDEN
+        return jsonify("ERROR: debe loguearse para modificar esta película"), HTTPStatus.FORBIDDEN
 
 
-@servidor_API.route("/peliculas/", methods=["DELETE"])
-@servidor_API.route("/peliculas", methods=["DELETE"])
+@servidor_API.route("/pelicula/", methods=["DELETE"])
+@servidor_API.route("/pelicula", methods=["DELETE"])
 def peliculas_borrar_una():
     global usuario_id_auth
 
@@ -304,29 +302,33 @@ def peliculas_borrar_una():
                 if peliculas[i]["id"] == int(id):
                     if peliculas[i]["usuario_id"] == usuario_id_auth:
                         if checkear_comentarios_foraneos(usuario_id_auth, id):
-                            return jsonify("ERROR: no puede eliminarse, comentarios foráneos"), HTTPStatus.FORBIDDEN
+                            return jsonify("ERROR: no puede eliminarse, existen comentarios foráneos"), HTTPStatus.FORBIDDEN
                         else:
                             pelicula_eliminada = peliculas.pop(i)
 
-                            return jsonify("INFO: película eliminada"), HTTPStatus.OK
+                            objArchivo = open(ruta_data_peliculas, "w", encoding="utf-16")
+                            objArchivo.write(json.dumps(peliculas, indent=4, ensure_ascii=False))
+                            objArchivo.close()
+
+                            return jsonify("INFO: película eliminada!"), HTTPStatus.OK
                     else:
-                        return jsonify("ERROR: no es de su autoría"), HTTPStatus.FORBIDDEN
+                        return jsonify("ERROR: la película no es de su autoría"), HTTPStatus.FORBIDDEN
             return jsonify("INFO: <" + str(id) + "> no existe"), HTTPStatus.NOT_FOUND
         else:
             return jsonify("INFO: <id> debe estar presente"), HTTPStatus.BAD_REQUEST
     else:
-        return jsonify("ERROR: no logueado"), HTTPStatus.FORBIDDEN
+        return jsonify("ERROR: debe loguearse para borrar esta película"), HTTPStatus.FORBIDDEN
 
 
 # - Comentarios
-@servidor_API.route("/comentarios", methods=["GET"])
 @servidor_API.route("/comentarios/", methods=["GET"])
+@servidor_API.route("/comentarios", methods=["GET"])
 def comentarios_devolver_todos():
     return jsonify(comentarios), HTTPStatus.OK
 
 
-@servidor_API.route("/peliculas/<clnt_id>/comentarios", methods=["GET"])
-@servidor_API.route("/peliculas/<clnt_id>/comentarios/", methods=["GET"])
+@servidor_API.route("/pelicula/<clnt_id>/comentarios/", methods=["GET"])
+@servidor_API.route("/pelicula/<clnt_id>/comentarios", methods=["GET"])
 def comentarios_devolver_por_pelicula(clnt_id):
     if clnt_id.isnumeric():
         id = int(clnt_id)
@@ -338,8 +340,8 @@ def comentarios_devolver_por_pelicula(clnt_id):
         return jsonify("[err] - <id> debe ser entero"), HTTPStatus.BAD_REQUEST
 
 
-@servidor_API.route("/usuarios/<clnt_id>/comentarios", methods=["GET"])
-@servidor_API.route("/usuarios/<clnt_id>/comentarios/", methods=["GET"])
+@servidor_API.route("/usuario/<clnt_id>/comentarios/", methods=["GET"])
+@servidor_API.route("/usuario/<clnt_id>/comentarios", methods=["GET"])
 def comentarios_devolver_por_usuario(clnt_id):
     if clnt_id.isnumeric():
         id = int(clnt_id)
@@ -352,8 +354,8 @@ def comentarios_devolver_por_usuario(clnt_id):
         return jsonify("[err] - <id> debe ser entero"), HTTPStatus.BAD_REQUEST
 
 
-@servidor_API.route("/peliculas/<clnt_id>/comentario/", methods=["POST"])
-@servidor_API.route("/peliculas/<clnt_id>/comentario", methods=["POST"])
+@servidor_API.route("/pelicula/<clnt_id>/comentario/", methods=["POST"])
+@servidor_API.route("/pelicula/<clnt_id>/comentario", methods=["POST"])
 def comentarios_agregar_uno(clnt_id):
     global ult_id_comentarios
     global usuario_id_auth
@@ -374,13 +376,17 @@ def comentarios_agregar_uno(clnt_id):
                     "usuario_id": usuario_id_auth
                 })
 
+                objArchivo = open(ruta_data_comentarios, "w", encoding="utf-16")
+                objArchivo.write(json.dumps(comentarios, indent=4, ensure_ascii=False))
+                objArchivo.close()
+
                 return jsonify("INFO: opinión agregada!"), HTTPStatus.CREATED
             else:
                 return jsonify("ERROR: <id> <opinión> deben estar presentes"), HTTPStatus.BAD_REQUEST
         else:
             return jsonify("ERROR: <id> debe ser entero"), HTTPStatus.BAD_REQUEST
     else:
-        return jsonify("ERROR: usuario no logueado"), HTTPStatus.FORBIDDEN
+        return jsonify("ERROR: debe loguearse para agregar este comentario"), HTTPStatus.FORBIDDEN
 
 
 # - Directores
@@ -390,8 +396,7 @@ def directores_devolver_todos():
     return jsonify(directores), HTTPStatus.OK
 
 
-@servidor_API.route("/peliculas/<clnt_id>/directores", methods=["GET"])
-@servidor_API.route("/peliculas/<clnt_id>/directores/", methods=["GET"])
+@servidor_API.route("/director/<clnt_id>", methods=["GET"])
 def directores_devolver_uno(clnt_id):
     if clnt_id.isnumeric():
         id = int(clnt_id)
@@ -405,14 +410,13 @@ def directores_devolver_uno(clnt_id):
 
 
 # - Géneros
-@servidor_API.route("/generos", methods=["GET"])
 @servidor_API.route("/generos/", methods=["GET"])
+@servidor_API.route("/generos", methods=["GET"])
 def generos_devolver_todos():
     return jsonify(generos), HTTPStatus.OK
 
 
-@servidor_API.route("/peliculas/<clnt_id>/generos", methods=["GET"])
-@servidor_API.route("/peliculas/<clnt_id>/generos/", methods=["GET"])
+@servidor_API.route("/genero/<clnt_id>", methods=["GET"])
 def generos_devolver_uno(clnt_id):
     if clnt_id.isnumeric():
         id = int(clnt_id)

@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function(){
     if (urlParams.has("id")){
         const datId = urlParams.get("id");
 
-        fetch(URL_base + "/peliculas/" + datId)
+        fetch(URL_base + "/pelicula/" + datId)
         .then(respuesta => respuesta.json())
         .then(pelicula => {
             let titulo = pelicula.título;
@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function(){
             document.getElementById("poster").value = poster;
 
 
-        fetch(URL_base + "/directores/")
+        fetch(URL_base + "/directores")
         .then(respuesta => respuesta.json())
         .then(directores => {
             let select = document.getElementById("director");
@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function(){
         })
 
 
-        fetch(URL_base + "/generos/")
+        fetch(URL_base + "/generos")
         .then(respuesta => respuesta.json())
         .then(generos => {
             let select = document.getElementById("genero");
@@ -110,18 +110,11 @@ document.addEventListener("DOMContentLoaded", function(){
                 body: JSON.stringify(datpelicula)
             }
 
-            fetch(URL_base + "/peliculas/" + datId, request_cnf)
+            fetch(URL_base + "/pelicula/" + datId, request_cnf)
             .then(respuesta => respuesta.json())
             .then(datos => {
-               // if (datos.includes("no logueado")){
-               //     alert(datos);
-               //     location.assign("indexKCO.htm");
-               // }
-
-                //alert(JSON.stringify(datpelicula));
-                //console.log(datpelicula);
-
                 alert(datos);
+
                 location.assign("indexKCO.htm");
                 })
             })

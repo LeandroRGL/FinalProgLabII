@@ -12,20 +12,20 @@ Crear una plataforma web para mantener una lista de películas recomendadas por 
   - Escritura ■■■
 - Servicos básicos
   - Sistema de log-in ■■□<br/>
-    &nbsp;&nbsp;&nbsp;/login&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;/logout
+    &nbsp;&nbsp;&nbsp;[URLBase]/usuario/login&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[URLBase]/usuario/logout
 - Otros servicios
   - Devolver la lista de directores presentes en la plataforma ■■■<br/>
-    &nbsp;&nbsp;&nbsp;/directores&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;/directores/
+    &nbsp;&nbsp;&nbsp;[URLBase]/directores&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[URLBase]/directores/
   - Devolver la lista de géneros presentes en la plataforma ■■■<br/>
-    &nbsp;&nbsp;&nbsp;/generos&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;/generos/
+    &nbsp;&nbsp;&nbsp;[URLBase]/generos &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[URLBase]/generos/
   - Devolver la lista de películas dirigidas por un director en particular ■■■<br/>
-    &nbsp;&nbsp;&nbsp;/peliculas/director/<id>
+    &nbsp;&nbsp;&nbsp;[URLBase]/peliculas/director/<id>
   - Devolver las películas que tienen imagen de portada agregada ■■■<br/>
-    &nbsp;&nbsp;&nbsp;/peliculas/con_portada&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;/peliculas/con_portada/
+    &nbsp;&nbsp;&nbsp;[URLBase]/peliculas/con_portada&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[URLBase]/peliculas/con_portada/
   - ABM de cada película<br/>
-    &nbsp;&nbsp;&nbsp;ALTA:&nbsp;&nbsp;&nbsp;/peliculas ■■□<br/>
-    &nbsp;&nbsp;&nbsp;BAJA:&nbsp;&nbsp;&nbsp;/peliculas ■■■<br/>
-    &nbsp;&nbsp;&nbsp;MODIF:&nbsp;&nbsp;&nbsp;/peliculas ■□□<br/>
+    &nbsp;&nbsp;&nbsp;ALTA:&nbsp;&nbsp;&nbsp;[URLBase]/peliculas ■■□<br/>
+    &nbsp;&nbsp;&nbsp;BAJA:&nbsp;&nbsp;&nbsp;[URLBase]/peliculas ■■■<br/>
+    &nbsp;&nbsp;&nbsp;MODIF:&nbsp;&nbsp;&nbsp;[URLBase]/peliculas ■□□<br/>
   - Agregar comentarios ■□□<br/>
 
 ### Front-end

@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", function(){
             }
         })
 
+
     fetch(URL_base + "/generos/")
     .then(respuesta => respuesta.json())
     .then(generos => {
@@ -91,15 +92,13 @@ document.addEventListener("DOMContentLoaded", function(){
             body: JSON.stringify(pelicula)
         }
 
-        fetch(URL_base + "/peliculas/", request_cnf)
-            .then(respuesta => respuesta.json())
-            .then(datos => {
+        fetch(URL_base + "/pelicula/", request_cnf)
+        .then(respuesta => respuesta.json())
+        .then(datos => {
+            alert(datos);
 
-                if (datos.includes("no logueado")){
-                    alert(datos);
-                    location.assign("indexKCO.htm");
-                }
-            })
+            location.assign("indexKCO.htm");
+        })
 
         document.getElementById("titulo").value = "";
         document.getElementById("ano").value = "";

@@ -5,10 +5,21 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/__data/comentarios.json" beforeDir="false" afterPath="$PROJECT_DIR$/__data/comentarios.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/__data/directores.json" beforeDir="false" afterPath="$PROJECT_DIR$/__data/directores.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/__data/generos.json" beforeDir="false" afterPath="$PROJECT_DIR$/__data/generos.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/__data/peliculas.json" beforeDir="false" afterPath="$PROJECT_DIR$/__data/peliculas.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/__data/usuarios.json" beforeDir="false" afterPath="$PROJECT_DIR$/__data/usuarios.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_js/agregarKCO.js" beforeDir="false" afterPath="$PROJECT_DIR$/_js/agregarKCO.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_js/comunKCO.js" beforeDir="false" afterPath="$PROJECT_DIR$/_js/comunKCO.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_js/editarKCO.js" beforeDir="false" afterPath="$PROJECT_DIR$/_js/editarKCO.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_js/indexKCO.js" beforeDir="false" afterPath="$PROJECT_DIR$/_js/indexKCO.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_js/loginKCO.js" beforeDir="false" afterPath="$PROJECT_DIR$/_js/loginKCO.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_js/logoutKCO.js" beforeDir="false" afterPath="$PROJECT_DIR$/_js/logoutKCO.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_js/peliculaKCO.js" beforeDir="false" afterPath="$PROJECT_DIR$/_js/peliculaKCO.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_vis/principal.css" beforeDir="false" afterPath="$PROJECT_DIR$/_vis/principal.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/agregarKCO.htm" beforeDir="false" afterPath="$PROJECT_DIR$/agregarKCO.htm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/editarKCO.htm" beforeDir="false" afterPath="$PROJECT_DIR$/editarKCO.htm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/indexKCO.htm" beforeDir="false" afterPath="$PROJECT_DIR$/indexKCO.htm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/loginKCO.htm" beforeDir="false" afterPath="$PROJECT_DIR$/loginKCO.htm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logoutKCO.htm" beforeDir="false" afterPath="$PROJECT_DIR$/logoutKCO.htm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/peliculaKCO.htm" beforeDir="false" afterPath="$PROJECT_DIR$/peliculaKCO.htm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/server.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

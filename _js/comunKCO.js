@@ -8,10 +8,11 @@ document.addEventListener("DOMContentLoaded", function(){
         let mnu_login = document.getElementById("mnulogin");
 
         if (datos == "si"){
-            mnu_login.innerHTML = "[logueado] LogOut";
+            mnu_login.innerHTML = "[usted está logueado] LogOut";
             mnu_login.href = "logoutKCO.htm";
         } else {
-        //    console.log("nope");
+            mnu_login.innerHTML = "[usted no está logueado] LogIn";
+            mnu_login.href = "loginKCO.htm";
         }
     })
 });
