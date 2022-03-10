@@ -23,14 +23,14 @@ Crear una plataforma web para mantener una lista de películas recomendadas por 
   - Devolver las películas que tienen imagen de portada agregada ■■■<br/>
     &nbsp;&nbsp;&nbsp;[URLBase]/peliculas/con_portada&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[URLBase]/peliculas/con_portada/
   - ABM de cada película<br/>
-    &nbsp;&nbsp;&nbsp;ALTA:&nbsp;&nbsp;&nbsp;[URLBase]/peliculas ■■□<br/>
+    &nbsp;&nbsp;&nbsp;ALTA:&nbsp;&nbsp;&nbsp;[URLBase]/peliculas ■■■<br/>
     &nbsp;&nbsp;&nbsp;BAJA:&nbsp;&nbsp;&nbsp;[URLBase]/peliculas ■■■<br/>
-    &nbsp;&nbsp;&nbsp;MODIF:&nbsp;&nbsp;&nbsp;[URLBase]/peliculas ■□□<br/>
+    &nbsp;&nbsp;&nbsp;MODIF:&nbsp;&nbsp;&nbsp;[URLBase]/peliculas ■■■<br/>
   - Agregar comentarios ■□□<br/>
 
 ### Front-end
-- Diseño básico (CSS precario) ■□□
-- Diseño responsivo (CSS ausente) □□□
+- Diseño básico (CSS precario) ■■□
+- Diseño responsivo (CSS ausente) ■□□
 - Consulta básicas
   - GET ■■■
   - POST ■■■
@@ -55,8 +55,8 @@ Crear una plataforma web para mantener una lista de películas recomendadas por 
 ### Puntuales
 - Listado películas (público) ■■□
 - Listado películas (loguado) ■■□
-- Ver película (público) ■□□
-- Ver película (logueado) ■□□
+- Ver película (público) ■■□
+- Ver película (logueado) ■■□
 
 ### Extras
 - Se implementó persitencia de datos leyendo y guardando datos JSON en archivos externos ■■■
