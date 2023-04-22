@@ -54,7 +54,7 @@ Crear una plataforma web para mantener una lista de películas recomendadas por 
 
 ### Puntuales
 - Listado películas (público) ■■□
-- Listado películas (loguado) ■■□
+- Listado películas (logueado) ■■□
 - Ver película (público) ■■□
 - Ver película (logueado) ■■□
 
